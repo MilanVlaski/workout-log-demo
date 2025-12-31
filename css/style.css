@@ -1,0 +1,64 @@
+:root {
+    --spacing: 1rem;
+    --set-element-size: 12ch;
+    --comment-width: 20ch;
+    --exercise-name-width: 25ch;
+
+    box-sizing: border-box;
+}
+
+.workout {
+    --sl-input-height-medium: 3rem;
+    width: calc(2 * var(--sl-spacing-large) + var(--exercise-name-width) + var(--comment-width) + 4 * var(--set-element-size) + 5 * var(--spacing));
+}
+
+.workout h1 {
+    /* text-align: center; */
+    font-size: 1.5rem;
+    display: inline;
+}
+
+.workout sl-format-date {
+    float: right;
+}
+
+.sets-of-exercise:not(:first-child) {
+    margin-top: var(--spacing);
+}
+
+.sets-of-exercise {
+    display: flex;
+    gap: var(--spacing);
+}
+
+/*  Sets and set are spread out, by default.
+    However, once a new weight as added, they come together,
+    leaving space for new "set" to be added.
+
+    Can be done by unsetting .set {justify-content: 
+*/
+.sets {
+    display: flex;
+    flex: 1;
+    gap: var(--spacing);
+}
+
+.set {
+    display: flex;
+    gap: var(--spacing);
+    flex: 1;
+    justify-content: space-between;
+    justify-content: unset;
+}
+
+.sets-of-exercise sl-input[name='exercise'] {
+    width: var(--exercise-name-width);
+}
+
+.set :is([name='reps'], [name='weight']) {
+    width: var(--set-element-size);
+}
+
+.sets-of-exercise *[name='comment'] {
+    width: var(--comment-width);
+}

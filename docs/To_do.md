@@ -1,0 +1,1 @@
+- [ ] Make the .sets take up all the space in the flex, and make the width of the entire sets of exercise equal to a default.
