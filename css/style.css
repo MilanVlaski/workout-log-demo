@@ -4,7 +4,7 @@
     --vertical-spacing: var(--spacing);
     --horizontal-spacing: var(--spacing);
 
-    --reps-width: clamp(4ch, 3ch + 3vw ,7ch);
+    --reps-width: clamp(4ch, 3ch + 3vw, 7ch);
     --weight-width: 12ch;
     --exercise-name-width: clamp(var(--reps-width), 5ch + 5vw, 25ch);
 
