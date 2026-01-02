@@ -13,9 +13,12 @@
 }
 
 body > main {
-    display: flex;
-    flex: 1;
-    justify-content: center;
+    margin-inline: auto;
+    max-width: 70ch;
+}
+
+.workout {
+    --sl-spacing-large: var(--vertical-spacing);
 }
 
 .workout h1 {
@@ -86,8 +89,4 @@ sl-input > sl-button {
     display: flex;
     justify-content: end;
     gap: var(--spacing);
-}
-
-.workout {
-    --sl-spacing-large: var(--vertical-spacing);
 }
