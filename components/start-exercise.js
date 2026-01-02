@@ -11,19 +11,21 @@ class StartExercise extends HTMLElement {
         this.attachShadow({ mode: 'open' });
     }
 
-    connectedCallback() {
-        const label = this.getAttribute('label');
-        const placeholder = this.getAttribute('placeholder');
-        const actionText = this.getAttribute('action-text');
+connectedCallback() {
+  if (this.shadowRoot.hasChildNodes()) return;
 
-        
-        this.shadowRoot.innerHTML = this.html(label, placeholder, actionText);
-        // Shoelace's autoloader doesn't scan our web components.
-        // Therefore, on the first custom component that uses, say, an sl-input,
-        // discover should be called.
-        discover(this.shadowRoot);
+  this.shadowRoot.innerHTML = this.html(
+    this.getAttribute('label'),
+    this.getAttribute('placeholder'),
+    this.getAttribute('action-text')
+  );
 
-    }
+  // Shoelace's autoloader doesn't scan our web components.
+  // Therefore, on the first custom component that uses, say, an sl-input,
+  // discover should be called.
+  discover(this.shadowRoot);
+}
+
 
   html(label, placeholder, actionText) {
     return /*html*/`
