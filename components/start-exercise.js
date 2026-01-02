@@ -1,3 +1,5 @@
+import {discover} from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js";
+
 /**
  * Depends on shoelace.
  * The combination of input and button is somewhat of a hack, but can in theory
@@ -14,7 +16,13 @@ class StartExercise extends HTMLElement {
         const placeholder = this.getAttribute('placeholder');
         const actionText = this.getAttribute('action-text');
 
+        
         this.shadowRoot.innerHTML = this.html(label, placeholder, actionText);
+        // Shoelace's autoloader doesn't scan our web components.
+        // Therefore, on the first custom component that uses, say, an sl-input,
+        // discover should be called.
+        discover(this.shadowRoot);
+
     }
 
   html(label, placeholder, actionText) {
