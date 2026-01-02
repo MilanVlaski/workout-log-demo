@@ -1,11 +1,14 @@
 :root {
     --spacing: 1rem;
 
+    --vertical-spacing: var(--spacing);
+    --horizontal-spacing: var(--spacing);
+
     --reps-width: clamp(4ch, 3ch + 3vw ,7ch);
     --weight-width: 12ch;
     --exercise-name-width: clamp(var(--reps-width), 5ch + 5vw, 25ch);
 
-    font-size: clamp(16px, 16px + .5vw,24px);
+    font-size: clamp(16px, 16px + .5vw, 24px);
     box-sizing: border-box;
 }
 
@@ -25,24 +28,25 @@ body > main {
 }
 
 .exercise-form:not(:first-child) {
-    margin-top: var(--spacing);
+    margin-top: var(--vertical-spacing);
 }
 
 .sets {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing);
+    gap: var(--vertical-spacing);
 }
 
 .set {
     display: flex;
-    gap: var(--spacing);
+    gap: var(--horizontal-spacing);
 }
 
 .repss {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: var(--spacing);
+    row-gap: var(--vertical-spacing);
+    column-gap: var(--horizontal-spacing);
 }
 
 .reps {
@@ -55,16 +59,14 @@ body > main {
 
 @media (max-width: 900px) {
     :root {
-        --spacing: clamp(0.2rem, 0.1rem + 1vw, 1rem);
+        --vertical-spacing: clamp(0.2rem, 0.1rem + 1vw, 1rem);
+        --horizontal-spacing: calc(var(--spacing) * 0.4);
     }
 
     .workout sl-input {
-        --sl-input-spacing-medium: var(--spacing);
+        --sl-input-spacing-medium: var(--horizontal-spacing);
     }
 
-    .hide-sm {
-        display: none;
-    }
 }
 
 .input-button sl-input {
@@ -77,7 +79,7 @@ sl-input > sl-button {
 }
 
 .controls :not(:first-child) {
-    margin-top: var(--spacing);
+    margin-top: var(--vertical-spacing);
 }
 
 .workout [slot='footer'] {
@@ -87,5 +89,5 @@ sl-input > sl-button {
 }
 
 .workout {
-    --sl-spacing-large: var(--spacing);
+    --sl-spacing-large: var(--vertical-spacing);
 }
