@@ -12,7 +12,7 @@
     box-sizing: border-box;
 }
 
-body > main {
+body>main {
     margin-inline: auto;
     max-width: 70ch;
 }
@@ -43,6 +43,7 @@ body > main {
 .set {
     display: flex;
     gap: var(--horizontal-spacing);
+    justify-content: space-between;
 }
 
 .repss {
@@ -66,7 +67,7 @@ body > main {
         --horizontal-spacing: calc(var(--spacing) * 0.4);
     }
 
-    .workout sl-input {
+    .workout :is(.reps, .weight) {
         --sl-input-spacing-medium: var(--horizontal-spacing);
     }
 
@@ -77,16 +78,30 @@ body > main {
     flex-direction: row;
 }
 
-sl-input > sl-button {
+sl-input>sl-button {
     margin-inline-end: 0;
 }
 
-.controls :not(:first-child) {
+/* Fix for start-exercise component in sl-card */
+start-exercise {
+    display: block;
+    width: 100%;
+    margin: var(--vertical-spacing) 0;
+}
+
+.controls> :not(:first-child) {
     margin-top: var(--vertical-spacing);
 }
 
-.workout [slot='footer'] {
+.actions {
     display: flex;
-    justify-content: end;
-    gap: var(--spacing);
+    flex-wrap: wrap;
+    column-gap: var(--horizontal-spacing);
+    row-gap: var(--horizontal-spacing);
+}
+
+.actions>* {
+    flex: 1 1 1rem;
+    min-width: 0;
+    width: 100%;
 }

@@ -1,5 +1,8 @@
-import "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
-
+/**
+ * Depends on shoelace.
+ * The combination of input and button is somewhat of a hack, but can in theory
+ * be extracted into a reusable component. When such a component becomes necessary, it will be created.
+ */
 class StartExercise extends HTMLElement {
     constructor() {
         super();
@@ -11,20 +14,24 @@ class StartExercise extends HTMLElement {
         const placeholder = this.getAttribute('placeholder');
         const actionText = this.getAttribute('action-text');
 
-        this.shadowRoot.innerHTML = `
+        this.shadowRoot.innerHTML = this.html(label, placeholder, actionText);
+    }
+
+  html(label, placeholder, actionText) {
+    return /*html*/`
         <style>
           sl-input > sl-button {
             margin-inline-end: 0;
           }
         </style>
 
-        <form>
-          <sl-input label="${label}" placeholder="${placeholder}" name="input">
+        <form action="startExercise" method="post">
+          <sl-input label="${label}" placeholder="${placeholder}" name="exercise" required>
             <sl-button type="submit" variant="primary" slot="suffix">${actionText}</sl-button>
           </sl-input>
         </form>
       `;
-    }
+  }
 }
 
 customElements.define('start-exercise', StartExercise);
