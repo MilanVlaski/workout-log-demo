@@ -1,19 +1,21 @@
 :root {
     --spacing: 1rem;
 
-    --reps-width: clamp(5ch, 3ch + 3vw ,7ch);
+    --reps-width: clamp(4ch, 3ch + 3vw ,7ch);
     --weight-width: 12ch;
     --exercise-name-width: clamp(var(--reps-width), 5ch + 5vw, 25ch);
 
+    font-size: clamp(16px, 16px + .5vw,24px);
     box-sizing: border-box;
 }
 
-.workout {
-    width: calc(2 * var(--sl-spacing-large) + var(--exercise-name-width) + var(--comment-width) + 4 * var(--set-element-size) + 5 * var(--spacing));
+body > main {
+    display: flex;
+    flex: 1;
+    justify-content: center;
 }
 
 .workout h1 {
-    /* text-align: center; */
     font-size: 1.5rem;
     display: inline;
 }
@@ -51,9 +53,9 @@
     width: var(--weight-width);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     :root {
-        --spacing: clamp(0.1rem, 0.1rem + 1vw, 1rem);
+        --spacing: clamp(0.2rem, 0.1rem + 1vw, 1rem);
     }
 
     .workout sl-input {
@@ -74,13 +76,16 @@ sl-input > sl-button {
     margin-inline-end: 0;
 }
 
-.repss {
-}
-
-.controls *:not(:first-child) {
+.controls :not(:first-child) {
     margin-top: var(--spacing);
 }
 
-.controls sl-button {
-    width:
+.workout [slot='footer'] {
+    display: flex;
+    justify-content: end;
+    gap: var(--spacing);
+}
+
+.workout {
+    --sl-spacing-large: var(--spacing);
 }

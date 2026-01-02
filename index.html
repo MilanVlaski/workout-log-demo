@@ -15,59 +15,115 @@
 
 <body>
 
-    <sl-card class="workout">
+    <main>
 
-        <div slot="header">
-            <h1>Workout</h1>
-            <sl-format-date date="2020-07-15T09:17:00-04:00" month="long" day="numeric" year="numeric"></sl-format-date>
-        </div>
-
-        <!-- Call it "new exercise" -->
-        <sl-input label="New exercise" placeholder="Exercise name" name="exercise">
-            <sl-button variant="primary" slot="suffix">Add</sl-button>
-        </sl-input>
-
-        <!-- repeating, of course -->
-        <form class="exercise-form">
-
+        <sl-card class="workout">
+    
+            <div slot="header">
+                <h1>Workout</h1>
+                <sl-format-date date="2020-07-15T09:17:00-04:00" month="long" day="numeric" year="numeric"></sl-format-date>
+            </div>
+    
+    
+            <!-- Call it "new exercise" -->
+             <form action="post">
+                 <sl-input label="New exercise" placeholder="Exercise name" name="exercise">
+                     <sl-button variant="primary" slot="suffix">Add</sl-button>
+                 </sl-input>
+             </form>
+    
+            <sl-divider></sl-divider>
+    
+            <!-- repeating, of course -->
+            <form class="exercise-form">
+    
+                <fieldset class="sets">
+                    <legend>Pullups</legend>
+                    <!-- repeating, of course-->
+                    <div class="set">
+    
+                        <div class="repss">
+                            <!-- repeating, of course -->
+                            <sl-input class="reps" name="reps"></sl-input>
+                            <sl-button class="reps" variant="primary">
+                                <sl-icon name="plus"></sl-icon>
+                            </sl-button>
+                            <!-- <sl-input name="reps"></sl-input>
+                            <sl-input name="reps"></sl-input>
+                            <sl-input name="reps"></sl-input> -->
+    
+                            <!-- <sl-input name="reps"></sl-input>
+                            <sl-input name="reps"></sl-input>
+                            <sl-input name="reps"></sl-input>
+                            <sl-input name="reps"></sl-input> -->
+    
+                        </div>
+    
+                        <sl-input placeholder="Weight" name="weight"></sl-input>
+                    </div>
+    
+                    <div class="controls">
+                        <sl-input label="Number of sets" type="number" placeholder="Sets" value="1" min="1" max="12"></sl-input>
+                        <sl-input label="Comment" placeholder="Add a comment?" name="comment"></sl-input>
+                        <sl-button style="width: 100%;" variant="primary">New weight</sl-button>
+                        <sl-button style="width: 100%;" variant="primary">Finish</sl-button>
+                    </div>
+    
+                </fieldset>
+    
+    
+            </form>
+            <sl-divider></sl-divider>
+    
             <fieldset class="sets">
                 <legend>Pullups</legend>
-                <!-- repeating, of course-->
                 <div class="set">
-
                     <div class="repss">
-                        <!-- repeating, of course -->
-                        <sl-input class="reps" name="reps"></sl-input>
-                        <sl-button class="reps" variant="primary">
-                            <sl-icon name="plus"></sl-icon>
-                        </sl-button>
-                        <!-- <sl-input name="reps"></sl-input>
-                        <sl-input name="reps"></sl-input>
-                        <sl-input name="reps"></sl-input> -->
-
-                        <!-- <sl-input name="reps"></sl-input>
-                        <sl-input name="reps"></sl-input>
-                        <sl-input name="reps"></sl-input>
-                        <sl-input name="reps"></sl-input> -->
-
+                        <sl-input class="reps" value="12" disabled></sl-input>
+                        <sl-input class="reps" value="11" disabled></sl-input>
+                        <sl-input class="reps" value="9" disabled></sl-input>
                     </div>
-
-                    <sl-input placeholder="Weight" name="weight"></sl-input>
+    
+                        <sl-input placeholder="Weight" name="weight" value="120kg" disabled></sl-input>
                 </div>
-
-                <div class="controls">
-                    <sl-input label="Number of sets" type="number" placeholder="Sets" value="1" min="1" max="12"></sl-input>
-                    <sl-input label="Comment" placeholder="Add a comment?" name="comment"></sl-input>
-                    <sl-button style="width: 100%;" variant="primary">New weight</sl-button>
-                    <sl-button style="width: 100%;" variant="primary">Finish</sl-button>
-                </div>
-
+    
             </fieldset>
-
-            <sl-divider></sl-divider>
-        </div>
-
-    </sl-card>
+    
+                    <fieldset class="sets">
+                <legend>Pullups</legend>
+                <div class="set">
+                    <div class="repss">
+                        <sl-input class="reps" value="12" disabled></sl-input>
+                        <sl-input class="reps" value="11" disabled></sl-input>
+                        <sl-input class="reps" value="9" disabled></sl-input>
+                    </div>
+    
+                        <sl-input placeholder="Weight" name="weight" value="120kg" disabled></sl-input>
+                </div>
+    
+            </fieldset>
+    
+                    <fieldset class="sets">
+                <legend>Pullups</legend>
+                <div class="set">
+                    <div class="repss">
+                        <sl-input class="reps" value="12" disabled></sl-input>
+                        <sl-input class="reps" value="11" disabled></sl-input>
+                        <sl-input class="reps" value="9" disabled></sl-input>
+                    </div>
+    
+                        <sl-input placeholder="Weight" name="weight" value="120kg" disabled></sl-input>
+                </div>
+    
+            </fieldset>
+    
+            <!-- footer with completion actions-->
+             <div slot="footer">
+                <sl-button variant="primary">Edit</sl-button>
+                <sl-button variant="primary">Edit</sl-button>
+             </div>
+        </sl-card>
+    </main>
 </body>
 
 </html>
