@@ -64,7 +64,7 @@ body>main {
 
 @media (max-width: 900px) {
     :root {
-        --vertical-spacing: clamp(0.2rem, 0.1rem + 1vw, 1rem);
+        --vertical-spacing: calc(var(--spacing) * 0.6);
         --horizontal-spacing: calc(var(--spacing) * 0.4);
     }
 
