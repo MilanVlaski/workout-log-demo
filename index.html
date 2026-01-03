@@ -29,11 +29,14 @@
 
             <sl-divider></sl-divider>
 
-            <form class="exercise-form">
+            <sl-card class="exercise-form">
 
-                <sl-button variant="danger" size="small" outline type="reset" style="float: right;">Clear</sl-button>
-                <fieldset class="sets">
-                    <legend>Pullups</legend>
+                <div slot="header">
+                    <h1>Pullups</h1>
+                    <sl-icon-button name="x" label="Exit"></sl-icon-button>
+                </div>
+
+                <div class="sets">
                     <div class="set">
 
                         <div class="repss">
@@ -51,65 +54,66 @@
                         <sl-input label="Number of sets" type="number" placeholder="Sets" value="1" min="1" max="12"></sl-input>
                         <sl-input label="Comment" placeholder="Add a comment?" name="comment"></sl-input>
                         <div class="actions">
-
-                            <sl-button size="small" variant="primary" outline>New weight</sl-button>
-                            <sl-button type="submit" variant="primary" size="small">Finish</sl-button>
+                            <div>
+                                <sl-button variant="danger" outline type="reset">Clear</sl-button>
+                                <sl-button variant="primary" outline>New weight</sl-button>
+                            </div>
+                            <sl-button type="submit" variant="primary">Finish</sl-button>
                         </div>
                     </div>
 
                 </fieldset>
 
 
-            </form>
-            <sl-divider></sl-divider>
+                </form>
 
-            <fieldset class="sets">
-                <legend>Pullups</legend>
-                <div class="set">
-                    <div class="repss">
-                        <sl-input class="reps" value="12" disabled></sl-input>
-                        <sl-input class="reps" value="11" disabled></sl-input>
-                        <sl-input class="reps" value="9" disabled></sl-input>
+                <fieldset class="sets">
+                    <legend>Pullups</legend>
+                    <div class="set">
+                        <div class="repss">
+                            <sl-input class="reps" value="12" disabled></sl-input>
+                            <sl-input class="reps" value="11" disabled></sl-input>
+                            <sl-input class="reps" value="9" disabled></sl-input>
+                        </div>
+
+                        <sl-input placeholder="Weight" name="weight" value="120kg" disabled></sl-input>
                     </div>
 
-                    <sl-input placeholder="Weight" name="weight" value="120kg" disabled></sl-input>
-                </div>
+                </fieldset>
 
-            </fieldset>
+                <fieldset class="sets">
+                    <legend>Pullups</legend>
+                    <div class="set">
+                        <div class="repss">
+                            <sl-input class="reps" value="12" disabled></sl-input>
+                            <sl-input class="reps" value="11" disabled></sl-input>
+                            <sl-input class="reps" value="9" disabled></sl-input>
+                        </div>
 
-            <fieldset class="sets">
-                <legend>Pullups</legend>
-                <div class="set">
-                    <div class="repss">
-                        <sl-input class="reps" value="12" disabled></sl-input>
-                        <sl-input class="reps" value="11" disabled></sl-input>
-                        <sl-input class="reps" value="9" disabled></sl-input>
+                        <sl-input placeholder="Weight" name="weight" value="120kg" disabled></sl-input>
                     </div>
 
-                    <sl-input placeholder="Weight" name="weight" value="120kg" disabled></sl-input>
-                </div>
+                </fieldset>
 
-            </fieldset>
+                <fieldset class="sets">
+                    <legend>Pullups</legend>
+                    <div class="set">
+                        <div class="repss">
+                            <sl-input class="reps" value="12" disabled></sl-input>
+                            <sl-input class="reps" value="11" disabled></sl-input>
+                            <sl-input class="reps" value="9" disabled></sl-input>
+                        </div>
 
-            <fieldset class="sets">
-                <legend>Pullups</legend>
-                <div class="set">
-                    <div class="repss">
-                        <sl-input class="reps" value="12" disabled></sl-input>
-                        <sl-input class="reps" value="11" disabled></sl-input>
-                        <sl-input class="reps" value="9" disabled></sl-input>
+                        <sl-input placeholder="Weight" name="weight" value="120kg" disabled></sl-input>
                     </div>
 
-                    <sl-input placeholder="Weight" name="weight" value="120kg" disabled></sl-input>
+                </fieldset>
+                <div style="display: flex; justify-content: space-between; margin-top: var(--vertical-spacing);">
+                    <sl-button variant="danger" outline type="reset">Clear</sl-button>
+                    <sl-button type="submit" variant="primary">Finish</sl-button>
                 </div>
 
-            </fieldset>
-            <div style="display: flex; justify-content: space-between; margin-top: var(--vertical-spacing);">
-                <sl-button variant="danger" outline type="reset">Clear</sl-button>
-                <sl-button type="submit" variant="primary">Finish</sl-button>
-            </div>
-
-        </sl-card>
+            </sl-card>
 
     </main>
 </body>

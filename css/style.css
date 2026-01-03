@@ -4,9 +4,9 @@
     --vertical-spacing: var(--spacing);
     --horizontal-spacing: var(--spacing);
 
-    --reps-width: clamp(4ch, 3ch + 3vw, 7ch);
+
+    --reps-width: 5ch;
     --weight-width: 12ch;
-    --exercise-name-width: clamp(var(--reps-width), 5ch + 5vw, 25ch);
 
     font-size: clamp(16px, 16px + .5vw, 24px);
     box-sizing: border-box;
@@ -19,6 +19,7 @@ body>main {
 
 .workout {
     --sl-spacing-large: var(--vertical-spacing);
+    --sl-input-spacing-medium: 0.5rem;
 }
 
 .workout h1 {
@@ -96,12 +97,20 @@ start-exercise {
 .actions {
     display: flex;
     flex-wrap: wrap;
-    column-gap: var(--horizontal-spacing);
-    row-gap: var(--horizontal-spacing);
+    justify-content: space-between;
 }
 
-.actions>* {
-    flex: 1 1 1rem;
-    min-width: 0;
-    width: 100%;
+.exercise-form [slot='header'] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.exercise-form [slot='header'] h1 {
+    font-size: 1.1rem;
+}
+
+.exercise-form [slot='header'] sl-icon-button {
+    font-size: var(--sl-font-size-large);
+}
+
