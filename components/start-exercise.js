@@ -1,4 +1,4 @@
-import {discover} from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js";
+import { discover } from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js";
 
 /**
  * Depends on shoelace.
@@ -6,25 +6,14 @@ import {discover} from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.
  * be extracted into a reusable component. When such a component becomes necessary, it will be created.
  */
 class StartExercise extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
 
-connectedCallback() {
-  if (this.shadowRoot.hasChildNodes()) return;
-
-  this.shadowRoot.innerHTML = this.html(
-    this.getAttribute('label'),
-    this.getAttribute('placeholder'),
-    this.getAttribute('action-text')
-  );
-
-  // Shoelace's autoloader doesn't scan our web components.
-  // Therefore, on the first custom component that uses, say, an sl-input,
-  // discover should be called.
-  discover(this.shadowRoot);
-}
+  connectedCallback() {
+    this.innerHTML = this.html(
+      this.getAttribute('label'),
+      this.getAttribute('placeholder'),
+      this.getAttribute('action-text')
+    );
+  }
 
 
   html(label, placeholder, actionText) {
