@@ -1,5 +1,3 @@
-import { discover } from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js";
-
 /**
  * Depends on shoelace.
  * The combination of input and button is somewhat of a hack, but can in theory
@@ -8,16 +6,7 @@ import { discover } from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@
 class StartExercise extends HTMLElement {
 
   connectedCallback() {
-    this.innerHTML = this.html(
-      this.getAttribute('label'),
-      this.getAttribute('placeholder'),
-      this.getAttribute('action-text')
-    );
-  }
-
-
-  html(label, placeholder, actionText) {
-    return /*html*/`
+    this.innerHTML = /*html*/`
         <style>
           sl-input > sl-button {
             margin-inline-end: 0;
@@ -25,11 +14,11 @@ class StartExercise extends HTMLElement {
         </style>
 
         <form action="startExercise" method="post">
-          <sl-input label="${label}" placeholder="${placeholder}" name="exercise" required>
-            <sl-button type="submit" variant="primary" slot="suffix">${actionText}</sl-button>
+          <sl-input label="Start New Exercise" placeholder="Exercise name" name="exercise" required>
+            <sl-button type="submit" variant="primary" slot="suffix">Start</sl-button>
           </sl-input>
         </form>
-      `;
+      `
   }
 }
 
