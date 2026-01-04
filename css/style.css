@@ -90,6 +90,10 @@ start-exercise {
     margin: var(--vertical-spacing) 0;
 }
 
+.controls {
+    margin-top: var(--vertical-spacing);
+}
+
 .controls> :not(:first-child) {
     margin-top: var(--vertical-spacing);
 }
