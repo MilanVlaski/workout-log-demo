@@ -3,11 +3,12 @@
  */
 class TrackExercise extends HTMLElement {
     connectedCallback() {
+        const exerciseName = this.getAttribute('name') || 'Exercise';
         this.innerHTML = /*html*/`
             <sl-card class="exercise-form">
 
                 <div slot="header">
-                    <h1>Pullups</h1>
+                    <h1 contentEditable>${exerciseName}</h1>
                     <sl-icon-button name="x" label="Exit"></sl-icon-button>
                 </div>
 

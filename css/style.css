@@ -113,4 +113,3 @@ start-exercise {
 .exercise-form [slot='header'] sl-icon-button {
     font-size: var(--sl-font-size-large);
 }
-
