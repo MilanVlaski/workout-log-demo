@@ -29,7 +29,7 @@ class TrackExercise extends HTMLElement {
                                 <sl-icon name="plus"></sl-icon>
                             </sl-button>
                         </div>
-                        <sl-input placeholder="Weight" name="weight" class="weight"></sl-input>
+                        <sl-input placeholder="Weight" name="weight" class="weight" value="${data?.setsWithWeight?.weight || ''}"></sl-input>
                     </div>
 
                     <div class="controls">
@@ -51,10 +51,10 @@ class TrackExercise extends HTMLElement {
     repsHtml(data) {
         const input = TrackExercise.setInput;
 
-        if (!data || !data.sets) {
+        if (!data?.setsWithWeight?.sets) {
             return input;
         } else {
-            return Array(data.sets.length).fill(input).join('\n');
+            return Array(data.setsWithWeight.sets.length).fill(input).join('\n');
         }
     }
 }
