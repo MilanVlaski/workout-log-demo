@@ -14,7 +14,7 @@
 
 body>main {
     margin-inline: auto;
-    max-width: 70ch;
+    max-width: fit-content;
 }
 
 .workout {
