@@ -21,55 +21,11 @@ class TrackExercise extends HTMLElement {
             comment: "Bla bla bla"
         }
 
-        this.replaceChildren(this.html(exerciseName));
-        this.setupGroups();
+        this.replaceChildren(this.dom(exerciseName));
     }
 
-    setupGroups() {
-        // 1. Identify all distinct groups in the DOM
-        const groups = this.querySelectorAll('.set-group');
-
-        groups.forEach((group) => {
-            // 2. Scoping within the block: these variables are locked to this iteration
-            const setInput = group.querySelector('.set-counter');
-            const addSetBtn = group.querySelector('sl-button.reps');
-
-            addSetBtn.addEventListener('click', () => {
-                const newVal = (parseInt(setInput.value) || 0) + 1;
-                setInput.value = newVal;
-                this.handleSetCountChange(group, newVal);
-
-                requestAnimationFrame(() => {
-                    const allReps = group.querySelectorAll('sl-input.reps');
-                    allReps[allReps.length - 1]?.focus();
-                });
-            });
-        });
-    }
-
-    handleSetCountChange(group, numberOfSets) {
-        const targetCount = Math.max(1, parseInt(numberOfSets) || 1);
-        // Scoping the container selection to the passed group
-        const container = group.querySelector('.repss');
-        const addButton = container.querySelector('sl-button.reps');
-
-        const currentInputs = Array.from(container.querySelectorAll('sl-input.reps'));
-
-        if (currentInputs.length < targetCount) {
-            const fragment = document.createDocumentFragment();
-            for (let i = currentInputs.length; i < targetCount; i++) {
-                fragment.appendChild(el('sl-input', { className: 'reps', name: 'reps' }));
-            }
-            container.insertBefore(fragment, addButton);
-        } else {
-            for (let i = currentInputs.length - 1; i >= targetCount; i--) {
-                currentInputs[i].remove();
-            }
-        }
-    }
-
-    html(exerciseName) {
-        const fragment = document.createRange().createContextualFragment(/*html*/`
+    dom(exerciseName) {
+        const main = document.createRange().createContextualFragment(/*html*/`
         <form class="exercise-form">
             <div slot="header">
                 <h1 contentEditable>${exerciseName}</h1>
@@ -86,21 +42,20 @@ class TrackExercise extends HTMLElement {
             </div>
         </form>`);
 
-        const form = fragment.querySelector('form');
-        const controls = fragment.querySelector('.controls');
-        const groups = this.initialData?.setsWithWeight || [null];
+        const form = main.querySelector('form');
+        const controls = main.querySelector('.controls');
+        const setGroups = this.initialData?.setsWithWeight || [null];
 
-        // Logic: For each group, insert it right before the controls block
-        groups.forEach(data => {
-            form.insertBefore(this.setGroupHtml(data), controls);
+        setGroups.forEach(data => {
+            form.insertBefore(this.setGroup(data), controls);
         });
 
-        return fragment;
+        return main;
     }
 
-    setGroupHtml(group) {
+    setGroup(group) {
         // HTML
-        const fragment = document.createRange().createContextualFragment(/*html*/`
+        const main = document.createRange().createContextualFragment(/*html*/`
         <div class="set-group">
             <div class="set">
                 <div class="repss">
@@ -114,52 +69,74 @@ class TrackExercise extends HTMLElement {
             <sl-input label="Number of sets" type="number" class="set-counter" value="${group?.sets?.length || 1}" min="1" max="12"></sl-input>
         </div>`);
 
-        const repss = fragment.querySelector('.repss');
-        const plusBtn = fragment.querySelector('sl-button.reps');
-        repss.insertBefore(this.repsHtml(group?.sets || []), plusBtn);
+        const repss = main.querySelector('.repss');
+        const plusBtn = main.querySelector('sl-button.reps');
+        repss.insertBefore(this.reps(group?.sets || []), plusBtn);
 
 
         // BEHAVIOR
 
-        fragment.querySelector('.set-counter')
-            .addEventListener('sl-change', (event) => {
-                // 2. Create the custom event
-                event.target.dispatchEvent(new CustomEvent(Events.SET_COUNT_CHANGED, {
-                    detail: { setCount: event.target.value },
-                    bubbles: true,
-                    composed: true               // Allows the event to pass through Shadow DOM boundaries
-                }));
-            });
+        const setCounter = main.querySelector('.set-counter')
+        setCounter.addEventListener('sl-change', (event) => {
+            // 2. Create the custom event
+            setCounter.dispatchEvent(new CustomEvent(Events.SET_COUNT_CHANGED, {
+                detail: { setCount: event.target.value },
+                bubbles: true,
+                // composed: true               // Allows the event to pass through Shadow DOM boundaries
+            }));
+        });
 
-        fragment.querySelector('.set-group')
-            .addEventListener(Events.SET_COUNT_CHANGED, (e) => {
-                handleSetCountChange(e.detail.setCount)
-            })
+        const setGroup = main.querySelector('.set-group')
+        setGroup.addEventListener(Events.SET_COUNT_CHANGED, (e) => {
+            handleSetCountChange(e.detail.setCount)
+        })
 
+        // If we want encapsulation, repss can be moved into a component which is told 
+        // to execute a function similar to this one
         function handleSetCountChange(numberOfSets) {
-        const targetCount = Math.max(1, parseInt(numberOfSets) || 1);
-        // Scoping the container selection to the passed group
+            const targetCount = Math.max(1, parseInt(numberOfSets) || 1);
+            // Scoping the container selection to the passed group
 
-        const currentInputs = Array.from(repss.querySelectorAll('sl-input.reps'));
+            const currentInputs = Array.from(repss.querySelectorAll('sl-input.reps'));
 
-        if (currentInputs.length < targetCount) {
-            const fragment = document.createDocumentFragment();
-            for (let i = currentInputs.length; i < targetCount; i++) {
-                fragment.appendChild(el('sl-input', { className: 'reps', name: 'reps' }));
-            }
-            repss.insertBefore(fragment, plusBtn);
-        } else {
-            for (let i = currentInputs.length - 1; i >= targetCount; i--) {
-                currentInputs[i].remove();
+            if (currentInputs.length < targetCount) {
+                // Add inputs
+                const fragment = document.createDocumentFragment();
+                for (let i = currentInputs.length; i < targetCount; i++) {
+                    fragment.appendChild(el('sl-input', { className: 'reps', name: 'reps' }));
+                }
+                repss.insertBefore(fragment, plusBtn);
+            } else {
+                // Remove inputs
+                for (let i = currentInputs.length - 1; i >= targetCount; i--) {
+                    currentInputs[i].remove();
+                }
             }
         }
-    }
-            
 
-        return fragment;
+        plusBtn.addEventListener('click', () => {
+            plusBtn.dispatchEvent(new CustomEvent(Events.ADD_SETS, { bubbles: true, }))
+        })
+
+        setGroup.addEventListener(Events.ADD_SETS, () => {
+            handleAddSets()
+        })
+
+        function handleAddSets() {
+            handleSetCountChange(++setCounter.value);
+
+            // Because the element gets created in the function above, giving it focus is troublesome.
+            requestAnimationFrame(() => {
+                const allReps = repss.querySelectorAll('sl-input.reps');
+                allReps[allReps.length - 1]?.focus();
+            });
+        }
+
+        this.setGroup
+        return main;
     }
 
-    repsHtml(sets) {
+    reps(sets) {
         const items = sets.length > 0 ? sets : [""];
         const fragment = document.createDocumentFragment();
 
