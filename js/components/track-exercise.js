@@ -74,7 +74,6 @@ class TrackExercise extends HTMLElement {
 
     html(exerciseName) {
         return /*html*/`
-<sl-card>
     <form class="exercise-form">
         <div slot="header">
             <h1 contentEditable>${exerciseName}</h1>
@@ -92,8 +91,7 @@ class TrackExercise extends HTMLElement {
                 <sl-button type="submit" variant="primary">Finish</sl-button>
             </div>
         </div>
-    </form>
-</sl-card>`;
+    </form>`;
     }
 
     setGroupHtml(group) {
