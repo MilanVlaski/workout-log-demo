@@ -3,9 +3,6 @@
  */
 class TrackExercise extends HTMLElement {
 
-    // Define the static constant using the class name later
-    static setInput = /*html*/`<sl-input class="reps" name="reps"></sl-input>`
-
     initialData = null
 
     connectedCallback() {
@@ -20,9 +17,26 @@ class TrackExercise extends HTMLElement {
         //     comment: "Bla bla bla"
         // }
 
-        this.innerHTML = /*html*/`
+        this.innerHTML = this.html(exerciseName);
 
-<sl-card class="exercise-form">
+        const setInput = this.querySelector('.set-counter')
+
+        // sl-input is on every single input, while sl-change is not.
+        setInput.addEventListener('sl-input', (event) => {
+            this.handleSetCountChange(event.target.value)
+        });
+
+        const addSet = document.querySelector('sl-button.reps')
+
+        addSet.addEventListener('click', () => {
+            this.handleSetCountChange(++setInput.value)
+        })
+    }
+
+    html(exerciseName) {
+        return /*html*/`
+
+<form class="exercise-form">
     <div slot="header">
         <h1 contentEditable>${exerciseName}</h1>
         <sl-icon-button name="x" label="Exit"></sl-icon-button>
@@ -36,7 +50,7 @@ class TrackExercise extends HTMLElement {
             <sl-input label="Comment" placeholder="Add a comment?" name="comment" value="${this.initialData?.comment || ''}"></sl-input>
             <div class="actions">
                 <div>
-                    <sl-button variant="danger" outline type="reset">Clear</sl-button>
+                    <!-- <sl-button variant="danger" outline type="reset">Clear</sl-button> -->
                     <sl-button variant="primary" outline>New weight</sl-button>
                 </div>
                 <sl-button type="submit" variant="primary">Finish</sl-button>
@@ -44,20 +58,7 @@ class TrackExercise extends HTMLElement {
         </div>
     </form>
 </sl-card>
-            `;
-
-        const setInput = this.querySelector('.set-counter');
-
-        // sl-input is on every single input, while sl-change is not.
-        setInput.addEventListener('sl-input', (event) => {
-            this.handleSetCountChange(event.target.value);
-        });
-
-        const addSet = document.querySelector('sl-button.reps')
-
-        addSet.addEventListener('click', () => {
-            this.handleSetCountChange(++setInput.value)
-        })
+            `
     }
 
 handleSetCountChange(numberOfSets) {
