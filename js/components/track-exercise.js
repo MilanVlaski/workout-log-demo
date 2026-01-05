@@ -1,9 +1,9 @@
-import {el} from "../utils.js"
+import { el } from "../utils.js"
 
 class TrackExercise extends HTMLElement {
     initialData = null
 
-    
+
     connectedCallback() {
         const exerciseName = this.getAttribute('name') || 'Exercise'
 
@@ -20,7 +20,7 @@ class TrackExercise extends HTMLElement {
         //     comment: "Bla bla bla"
         // }
 
-        this.innerHTML = this.html(exerciseName);
+        this.replaceChildren(this.html(exerciseName));
         this.setupGroups();
     }
 
@@ -56,9 +56,9 @@ class TrackExercise extends HTMLElement {
         // Scoping the container selection to the passed group
         const container = group.querySelector('.repss');
         const addButton = container.querySelector('sl-button.reps');
-        
+
         const currentInputs = Array.from(container.querySelectorAll('sl-input.reps'));
-        
+
         if (currentInputs.length < targetCount) {
             const fragment = document.createDocumentFragment();
             for (let i = currentInputs.length; i < targetCount; i++) {
@@ -73,17 +73,15 @@ class TrackExercise extends HTMLElement {
     }
 
     html(exerciseName) {
-        return /*html*/`
+        return document.createRange().createContextualFragment(/*html*/`
     <form class="exercise-form">
         <div slot="header">
             <h1 contentEditable>${exerciseName}</h1>
             <sl-icon-button name="x" label="Exit"></sl-icon-button>
         </div>
-
-        ${this.initialData?.setsWithWeight 
-            ? this.initialData?.setsWithWeight.map(el => this.setGroupHtml(el)).join('') 
-            : this.setGroupHtml()
-        }
+        ${this.initialData?.setsWithWeight ?
+             this.initialData.setsWithWeight.map(el => this.setGroupHtml(el)).join('')
+             : this.setGroupHtml(null)}
         <div class="controls">
             <sl-input label="Comment" placeholder="Add a comment?" name="comment" value="${this.initialData?.comment || ''}"></sl-input>
             <div class="actions">
@@ -91,34 +89,31 @@ class TrackExercise extends HTMLElement {
                 <sl-button type="submit" variant="primary">Finish</sl-button>
             </div>
         </div>
-    </form>`;
+    </form>`);
     }
 
-    setGroupHtml(group) {
-        const weight = group?.weight || '';
-        const sets = group?.sets || [];
-
-        return /*html*/`
+    setGroupHtml(group, asStr = true) {
+        const html = /*html*/`
         <div class="set-group">
             <div class="set">
                 <div class="repss">
-                    ${this.repsHtml(sets)}
+                    ${this.repsHtml(group?.sets || [])}
                     <sl-button class="reps" variant="primary">
                         <sl-icon name="plus"></sl-icon>
                     </sl-button>
                 </div>
-                <sl-input placeholder="Weight" name="weight" class="weight" value="${weight}"></sl-input>
+                <sl-input placeholder="Weight" name="weight" class="weight" value="${group?.weight || ''}"></sl-input>
             </div>
-            <sl-input label="Number of sets" type="number" class="set-counter"
-                value="${sets.length || 1}" min="1" max="12"></sl-input>
+        <sl-input label="Number of sets" type="number" class="set-counter" value="${group?.sets?.length || 1}" min="1" max="12"></sl-input>
         </div>`;
+
+        return asStr ? html : document.createRange().createContextualFragment(html);
     }
 
-    repsHtml(sets) {
-        const items = sets.length > 0 ? sets : [""];
-        return items.map(val => /*html*/`
-            <sl-input class="reps" name="reps" value="${val}"></sl-input>
-        `).join('');
+    repsHtml(sets, asStr = true) {
+        const html = (sets.length > 0 ? sets : [""])
+        .map(val => /*html*/`<sl-input class="reps" name="reps" value="${val}"></sl-input>`).join('');
+        return asStr ? html : document.createRange().createContextualFragment(html);
     }
 }
 
