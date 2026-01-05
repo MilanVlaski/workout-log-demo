@@ -7,18 +7,18 @@ class TrackExercise extends HTMLElement {
     connectedCallback() {
         const exerciseName = this.getAttribute('name') || 'Exercise'
 
-        // this.initialData = {
-        //     setsWithWeight: [{
-        //         weight: "120kg",
-        //         sets: [1, 2, 3, 5, 1, 1, 5, 5, 5]
-        //     },
-        //     {
-        //         weight: "120kg",
-        //         sets: [1, 2, 3, 5, 1, 1, 5, 5, 5]
-        //     },
-        // ],
-        //     comment: "Bla bla bla"
-        // }
+        this.initialData = {
+            setsWithWeight: [{
+                weight: "120kg",
+                sets: [1, 2, 3, 5, 1, 1, 5, 5, 5]
+            },
+            {
+                weight: "120kg",
+                sets: [1, 2, 3, 5, 1, 1, 5, 5, 5]
+            },
+            ],
+            comment: "Bla bla bla"
+        }
 
         this.replaceChildren(this.html(exerciseName));
         this.setupGroups();
@@ -73,47 +73,69 @@ class TrackExercise extends HTMLElement {
     }
 
     html(exerciseName) {
-        return document.createRange().createContextualFragment(/*html*/`
-    <form class="exercise-form">
-        <div slot="header">
-            <h1 contentEditable>${exerciseName}</h1>
-            <sl-icon-button name="x" label="Exit"></sl-icon-button>
-        </div>
-        ${this.initialData?.setsWithWeight ?
-             this.initialData.setsWithWeight.map(el => this.setGroupHtml(el)).join('')
-             : this.setGroupHtml(null)}
-        <div class="controls">
-            <sl-input label="Comment" placeholder="Add a comment?" name="comment" value="${this.initialData?.comment || ''}"></sl-input>
-            <div class="actions">
-                <sl-button variant="primary" outline id="add-weight-btn">New weight</sl-button>
-                <sl-button type="submit" variant="primary">Finish</sl-button>
+        const fragment = document.createRange().createContextualFragment(/*html*/`
+        <form class="exercise-form">
+            <div slot="header">
+                <h1 contentEditable>${exerciseName}</h1>
+                <sl-icon-button name="x" label="Exit"></sl-icon-button>
             </div>
-        </div>
-    </form>`);
+
+            <!-- SetGroups -->
+            <div class="controls">
+                <sl-input label="Comment" placeholder="Add a comment?" name="comment" value="${this.initialData?.comment || ''}"></sl-input>
+                <div class="actions">
+                    <sl-button variant="primary" outline id="add-weight-btn">New weight</sl-button>
+                    <sl-button type="submit" variant="primary">Finish</sl-button>
+                </div>
+            </div>
+        </form>`);
+
+        const form = fragment.querySelector('form');
+        const controls = fragment.querySelector('.controls');
+        const groups = this.initialData?.setsWithWeight || [null];
+
+        // Logic: For each group, insert it right before the controls block
+        groups.forEach(data => {
+            form.insertBefore(this.setGroupHtml(data), controls);
+        });
+
+        return fragment;
     }
 
-    setGroupHtml(group, asStr = true) {
-        const html = /*html*/`
+    setGroupHtml(group) {
+        const fragment = document.createRange().createContextualFragment(/*html*/`
         <div class="set-group">
             <div class="set">
                 <div class="repss">
-                    ${this.repsHtml(group?.sets || [])}
+                <!-- Repss -->
                     <sl-button class="reps" variant="primary">
                         <sl-icon name="plus"></sl-icon>
                     </sl-button>
                 </div>
                 <sl-input placeholder="Weight" name="weight" class="weight" value="${group?.weight || ''}"></sl-input>
             </div>
-        <sl-input label="Number of sets" type="number" class="set-counter" value="${group?.sets?.length || 1}" min="1" max="12"></sl-input>
-        </div>`;
+            <sl-input label="Number of sets" type="number" class="set-counter" value="${group?.sets?.length || 1}" min="1" max="12"></sl-input>
+        </div>`);
 
-        return asStr ? html : document.createRange().createContextualFragment(html);
+        const repsContainer = fragment.querySelector('.repss');
+        const plusBtn = fragment.querySelector('sl-button.reps');
+        repsContainer.insertBefore(this.repsHtml(group?.sets || []), plusBtn);
+
+        return fragment;
     }
 
-    repsHtml(sets, asStr = true) {
-        const html = (sets.length > 0 ? sets : [""])
-        .map(val => /*html*/`<sl-input class="reps" name="reps" value="${val}"></sl-input>`).join('');
-        return asStr ? html : document.createRange().createContextualFragment(html);
+    repsHtml(sets) {
+        const items = sets.length > 0 ? sets : [""];
+        const fragment = document.createDocumentFragment();
+
+        items.forEach(val => {
+            const input = document.createRange().createContextualFragment(/*html*/`
+            <sl-input class="reps" name="reps" value="${val}"></sl-input>
+        `);
+            fragment.appendChild(input);
+        });
+
+        return fragment;
     }
 }
 
