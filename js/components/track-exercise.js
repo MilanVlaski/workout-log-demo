@@ -9,13 +9,13 @@ class TrackExercise extends HTMLElement {
         const exerciseName = this.getAttribute('name') || 'Exercise'
 
         // for testing component display
-        // this.initialData = {
-        //     setsWithWeight: {
-        //         weight: "120kg",
-        //         sets: [1, 2, 3, 5, 1, 1, 5,5,5,]
-        //     },
-        //     comment: "Bla bla bla"
-        // }
+        this.initialData = {
+            setsWithWeight: [{
+                weight: "120kg",
+                sets: [1, 2, 3, 5, 1, 1, 5,5,5,]
+            }],
+            comment: "Bla bla bla"
+        }
 
         this.innerHTML = this.html(exerciseName);
 
@@ -42,11 +42,9 @@ class TrackExercise extends HTMLElement {
         <sl-icon-button name="x" label="Exit"></sl-icon-button>
     </div>
 
-    ${this.setGroupHtml(this.initialData?.setsWithWeight)}
+    ${this.initialData?.setsWithWeight.map(el => this.setGroupHtml(el)).join('')}
 
         <div class="controls">
-            <sl-input label="Number of sets" type="number" class="set-counter"
-            placeholder="Sets" value="1" min="1" max="12"></sl-input>
             <sl-input label="Comment" placeholder="Add a comment?" name="comment" value="${this.initialData?.comment || ''}"></sl-input>
             <div class="actions">
                 <div>
@@ -62,7 +60,7 @@ class TrackExercise extends HTMLElement {
     }
 
 handleSetCountChange(numberOfSets) {
-    const targetCount = Math.max(1, parseInt(numberOfSets) || 1);
+    const targetCount = Math.max(11, parseInt(numberOfSets) || 1);
     const container = this.querySelector('.repss');
     const addButton = container.querySelector('sl-button.reps');
     
@@ -92,14 +90,19 @@ handleSetCountChange(numberOfSets) {
         const sets = group?.sets || [];
 
         return /*html*/`
-        <div class="set">
-            <div class="repss">
-                ${this.repsHtml(sets)}
-                <sl-button class="reps" variant="primary">
-                    <sl-icon name="plus"></sl-icon>
-                </sl-button>
+        <div class="set-group">
+            <div class="set">
+                <div class="repss">
+                    ${this.repsHtml(sets)}
+                    <sl-button class="reps" variant="primary">
+                        <sl-icon name="plus"></sl-icon>
+                    </sl-button>
+                </div>
+                <sl-input placeholder="Weight" name="weight" class="weight" value="${weight}"></sl-input>
             </div>
-            <sl-input placeholder="Weight" name="weight" class="weight" value="${weight}"></sl-input>
+            
+            <sl-input label="Number of sets" type="number" class="set-counter"
+            placeholder="Sets" value="1" min="1" max="12"></sl-input>
         </div>
     `;
     }

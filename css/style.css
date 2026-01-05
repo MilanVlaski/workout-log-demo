@@ -31,10 +31,6 @@ body>main {
     float: right;
 }
 
-.exercise-form:not(:first-child) {
-    margin-top: var(--vertical-spacing);
-}
-
 .sets {
     display: flex;
     flex-direction: column;
@@ -116,4 +112,8 @@ start-exercise {
 
 .exercise-form [slot='header'] sl-icon-button {
     font-size: var(--sl-font-size-large);
+}
+
+.set-group > :not(first-child) {
+    margin-top: var(--vertical-spacing);
 }
