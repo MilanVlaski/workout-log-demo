@@ -1,3 +1,12 @@
+## Reasonable event handling
+
+1. A component is either a Web Component, or a function returning a DocumentFragment.
+2. We can make a component emit an event. And also make a component listen to the event. This can happen upon component creation as the existence of the component OR the event, is not mandatory for this to work. At runtime, though, these connect.
+3. For this to work, I need to be able to create components with something resembling HTML and in the same function, attaching event listeners to pieces of that component.
+4. In response to an event, a node can either
+   1. Emit more events.
+   2. Change it's own DOM.
+
 ## Track exercise component
 1. [x] Parameterized data -> {setsWithWeight: {weight: "120kg", sets: [10, 11, 12]}, comment: "bla bla"}, defaults being nothing. However, the default for number of sets should be 1, as at least one must be displayed, and this is already in the HTML.
 2. [x] Set inputs render based on the value of "number of sets input". However, for the initial load, ie, if the number of sets param is null, the default rendering applies. BUT, when the number of sets is given, then the rendering is dynamic.
