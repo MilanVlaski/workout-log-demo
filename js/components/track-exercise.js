@@ -28,10 +28,11 @@ class TrackExercise extends HTMLElement {
         <sl-icon-button name="x" label="Exit"></sl-icon-button>
     </div>
 
-    ${this.createSetGroupHtml(this.initialData?.setsWithWeight)}
+    ${this.setGroupHtml(this.initialData?.setsWithWeight)}
 
         <div class="controls">
-            <sl-input label="Number of sets" type="number" placeholder="Sets" value="1" min="1" max="12"></sl-input>
+            <sl-input label="Number of sets" type="number" class="set-counter"
+            placeholder="Sets" value="1" min="1" max="12"></sl-input>
             <sl-input label="Comment" placeholder="Add a comment?" name="comment" value="${this.initialData?.comment || ''}"></sl-input>
             <div class="actions">
                 <div>
@@ -44,9 +45,48 @@ class TrackExercise extends HTMLElement {
     </form>
 </sl-card>
             `;
+
+        const setInput = this.querySelector('.set-counter');
+
+        // sl-input is on every single input, while sl-change is not.
+        setInput.addEventListener('sl-input', (event) => {
+            this.handleSetCountChange(event.target.value);
+        });
+
+        const addSet = document.querySelector('sl-button.reps')
+
+        addSet.addEventListener('click', () => {
+            this.handleSetCountChange(++setInput.value)
+        })
     }
 
-    createSetGroupHtml(group) {
+handleSetCountChange(numberOfSets) {
+    const targetCount = Math.max(1, parseInt(numberOfSets) || 1);
+    const container = this.querySelector('.repss');
+    const addButton = container.querySelector('sl-button.reps');
+    
+    // Get current inputs
+    let currentInputs = Array.from(container.querySelectorAll('sl-input.reps'));
+    
+    if (currentInputs.length < targetCount) {
+        // Add missing ones
+        const fragment = document.createDocumentFragment();
+        for (let i = currentInputs.length; i < targetCount; i++) {
+            const newInput = document.createElement('sl-input');
+            newInput.className = 'reps';
+            newInput.setAttribute('name', 'reps');
+            fragment.appendChild(newInput);
+        }
+        container.insertBefore(fragment, addButton);
+    } else {
+        // Remove excess from the end
+        for (let i = currentInputs.length - 1; i >= targetCount; i--) {
+            currentInputs[i].remove();
+        }
+    }
+}
+
+    setGroupHtml(group) {
         const weight = group?.weight || '';
         const sets = group?.sets || [];
 
