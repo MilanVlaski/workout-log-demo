@@ -34,11 +34,6 @@ class TrackExercise extends HTMLElement {
             const setInput = group.querySelector('.set-counter');
             const addSetBtn = group.querySelector('sl-button.reps');
 
-            // Bind directly to the scoped element
-            setInput.addEventListener('sl-change', (event) => {
-                // this.handleSetCountChange(group, event.target.value);
-            });
-
             addSetBtn.addEventListener('click', () => {
                 const newVal = (parseInt(setInput.value) || 0) + 1;
                 setInput.value = newVal;
