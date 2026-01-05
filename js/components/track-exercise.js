@@ -1,4 +1,5 @@
 import { el } from "../utils.js"
+import { Events } from "../events.js"
 
 class TrackExercise extends HTMLElement {
     initialData = null
@@ -35,7 +36,7 @@ class TrackExercise extends HTMLElement {
 
             // Bind directly to the scoped element
             setInput.addEventListener('sl-change', (event) => {
-                this.handleSetCountChange(group, event.target.value);
+                // this.handleSetCountChange(group, event.target.value);
             });
 
             addSetBtn.addEventListener('click', () => {
@@ -103,6 +104,7 @@ class TrackExercise extends HTMLElement {
     }
 
     setGroupHtml(group) {
+        // HTML
         const fragment = document.createRange().createContextualFragment(/*html*/`
         <div class="set-group">
             <div class="set">
@@ -117,9 +119,47 @@ class TrackExercise extends HTMLElement {
             <sl-input label="Number of sets" type="number" class="set-counter" value="${group?.sets?.length || 1}" min="1" max="12"></sl-input>
         </div>`);
 
-        const repsContainer = fragment.querySelector('.repss');
+        const repss = fragment.querySelector('.repss');
         const plusBtn = fragment.querySelector('sl-button.reps');
-        repsContainer.insertBefore(this.repsHtml(group?.sets || []), plusBtn);
+        repss.insertBefore(this.repsHtml(group?.sets || []), plusBtn);
+
+
+        // BEHAVIOR
+
+        fragment.querySelector('.set-counter')
+            .addEventListener('sl-change', (event) => {
+                // 2. Create the custom event
+                event.target.dispatchEvent(new CustomEvent(Events.SET_COUNT_CHANGED, {
+                    detail: { setCount: event.target.value },
+                    bubbles: true,
+                    composed: true               // Allows the event to pass through Shadow DOM boundaries
+                }));
+            });
+
+        fragment.querySelector('.set-group')
+            .addEventListener(Events.SET_COUNT_CHANGED, (e) => {
+                handleSetCountChange(e.detail.setCount)
+            })
+
+        function handleSetCountChange(numberOfSets) {
+        const targetCount = Math.max(1, parseInt(numberOfSets) || 1);
+        // Scoping the container selection to the passed group
+
+        const currentInputs = Array.from(repss.querySelectorAll('sl-input.reps'));
+
+        if (currentInputs.length < targetCount) {
+            const fragment = document.createDocumentFragment();
+            for (let i = currentInputs.length; i < targetCount; i++) {
+                fragment.appendChild(el('sl-input', { className: 'reps', name: 'reps' }));
+            }
+            repss.insertBefore(fragment, plusBtn);
+        } else {
+            for (let i = currentInputs.length - 1; i >= targetCount; i--) {
+                currentInputs[i].remove();
+            }
+        }
+    }
+            
 
         return fragment;
     }
