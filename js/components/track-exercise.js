@@ -4,7 +4,7 @@ import { Events } from "../events.js"
 class TrackExercise extends HTMLElement {
     initialData = null
 
-    static mainTemplate = Object.assign(document.createElement('template'), {
+    static mainTemplate = el('template', {
         innerHTML: /*html*/`
         <form class="exercise-form">
             <div slot="header">
@@ -21,6 +21,22 @@ class TrackExercise extends HTMLElement {
                 </div>
             </div>
         </form>`
+    })
+
+    static setGroupTemplate = el('template', {
+        innerHTML: /*html*/`
+        <div class="set-group">
+            <div class="set">
+                <div class="repss">
+                <!-- Repss -->
+                    <sl-button class="reps" variant="primary">
+                        <sl-icon name="plus"></sl-icon>
+                    </sl-button>
+                </div>
+                <sl-input placeholder="Weight" name="weight" class="weight"></sl-input>
+            </div>
+            <sl-input label="Number of sets" type="number" class="set-counter" min="1" max="12"></sl-input>
+        </div>`
     })
 
 
@@ -46,8 +62,7 @@ class TrackExercise extends HTMLElement {
     dom(exerciseName) {
         const main = TrackExercise.mainTemplate.content.cloneNode(true)
 
-        main.querySelector('h1')
-            .textContent = exerciseName
+        main.querySelector('h1').textContent = exerciseName
 
         const form = main.querySelector('form');
         const controls = main.querySelector('.controls');
@@ -64,19 +79,7 @@ class TrackExercise extends HTMLElement {
 
     setGroup(group) {
         // HTML
-        const main = document.createRange().createContextualFragment(/*html*/`
-        <div class="set-group">
-            <div class="set">
-                <div class="repss">
-                <!-- Repss -->
-                    <sl-button class="reps" variant="primary">
-                        <sl-icon name="plus"></sl-icon>
-                    </sl-button>
-                </div>
-                <sl-input placeholder="Weight" name="weight" class="weight"></sl-input>
-            </div>
-            <sl-input label="Number of sets" type="number" class="set-counter" min="1" max="12"></sl-input>
-        </div>`);
+        const main = TrackExercise.setGroupTemplate.content.cloneNode(true)
 
         const setCounter = main.querySelector('.set-counter')
 
