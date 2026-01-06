@@ -41,18 +41,18 @@ class TrackExercise extends HTMLElement {
     connectedCallback() {
         const exerciseName = this.getAttribute('name') || 'Exercise'
 
-        this.initialData = {
-            setsWithWeight: [{
-                weight: "120kg",
-                sets: [10, 9, 8]
-            },
-            {
-                weight: "100kg",
-                sets: [11, 8, 8]
-            },
-            ],
-            comment: "Form was shaky."
-        }
+        // this.initialData = {
+        //     setsWithWeight: [{
+        //         weight: "120kg",
+        //         sets: [10, 9, 8]
+        //     },
+        //     {
+        //         weight: "100kg",
+        //         sets: [11, 8, 8]
+        //     },
+        //     ],
+        //     comment: "Form was shaky."
+        // }
 
         this.replaceChildren(this.main(exerciseName));
     }
