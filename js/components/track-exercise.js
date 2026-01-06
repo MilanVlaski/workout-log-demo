@@ -75,20 +75,20 @@ class TrackExercise extends HTMLElement {
         return main;
     }
 
-    setGroup(group) {
+    setGroup(setGroupData) {
         // HTML
         const main = TrackExercise.setGroupTemplate.content.cloneNode(true)
 
         const setCounter = main.querySelector('.set-counter')
 
         main.querySelector('[name="weight"')
-            .value = group?.weight || ''
+            .value = setGroupData?.weight || ''
 
-        setCounter.value = group?.sets?.length || 1
+        setCounter.value = setGroupData?.sets?.length || 1
 
         const repss = main.querySelector('.repss');
         const plusBtn = main.querySelector('sl-button.reps');
-        repss.insertBefore(this.reps(group?.sets || []), plusBtn);
+        repss.insertBefore(this.reps(setGroupData?.sets || []), plusBtn);
 
 
         // BEHAVIOR
