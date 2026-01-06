@@ -18,4 +18,20 @@
  * });
  */
 export function el(tag, props) { return Object.assign(document.createElement(tag), props) }
-export function template(html) {return el('template', {innerHTML: html})}
+/**
+ * Creates a dormant HTMLTemplateElement from an HTML string.
+ * * This utility uses the `el` helper to create a `<template>` element and populates 
+ * its `innerHTML`. Templates are not rendered in the DOM until they are cloned 
+ * and appended, making them ideal for reusable UI structures like list items 
+ * or form groups.
+ *
+ * @param {string} html - A string containing the HTML structure to be templated.
+ * @returns {HTMLTemplateElement} The tetgmplate element containing the parsed HTML.
+ * * @example
+ * // 1. Define the template
+ * const rowTemplate = template('<tr><td>Data</td></tr>');
+ * * // 2. Use it in a component (cloning the .content)
+ * const clone = rowTemplate.content.cloneNode(true);
+ * document.querySelector('tbody').appendChild(clone);
+ */
+export function template(html) { return el('template', { innerHTML: html }) }
