@@ -44,14 +44,14 @@ class TrackExercise extends HTMLElement {
         this.initialData = {
             setsWithWeight: [{
                 weight: "120kg",
-                sets: [1, 2, 3, 5, 1, 1, 5, 5, 5]
+                sets: [10, 9, 8]
             },
-                // {
-                //     weight: "120kg",
-                //     sets: [1, 2, 3, 5, 1, 1, 5, 5, 5]
-                // },
+            {
+                weight: "100kg",
+                sets: [11, 8, 8]
+            },
             ],
-            comment: "Bla bla bla"
+            comment: "Form was shaky."
         }
 
         this.replaceChildren(this.main(exerciseName));
@@ -80,6 +80,31 @@ class TrackExercise extends HTMLElement {
 
         form.addEventListener(Events.ADD_WEIGHT, () => {
             form.insertBefore(this.setGroup(), controls)
+        })
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const setGroups = Array.from(form.querySelectorAll('.set-group')).map(group => {
+                // Use the class 'weight' which you already defined in your template
+                const weightInput = group.querySelector('.weight');
+                const weight = weightInput ? weightInput.value : "";
+
+                // Use the class 'reps' which you assigned to the sl-input
+                const sets = Array.from(group.querySelectorAll('sl-input.reps'))
+                    .map(input => input.value)
+                    .filter(val => val !== "")
+                    .map(val => isNaN(val) ? val : parseInt(val, 10));
+
+                return { weight, sets };
+            });
+
+            const finalData = {
+                setsWithWeight: setGroups,
+                comment: form.querySelector('[name="comment"]')?.value || ""
+            };
+
+            form.dispatchEvent(new CustomEvent(Events.FINISH_WORKOUT, { detail: finalData }));
         })
 
         return main;
