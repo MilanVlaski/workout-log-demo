@@ -1,7 +1,3 @@
-## Using <template>
-- [ ] Move template literals (${}) from code, to programmatic setting.
-- [ ] Use templates instead of strings.
-
 ## Reasonable event handling
 
 1. A component is either a Web Component, or a function returning a DocumentFragment.
@@ -16,7 +12,7 @@
 2. [x] Set inputs render based on the value of "number of sets input". However, for the initial load, ie, if the number of sets param is null, the default rendering applies. BUT, when the number of sets is given, then the rendering is dynamic.
 3. [x] Likewise, when the number of sets input increases, a new input gets added. And when it decreases, inputs get deleted. Also, the way to do this is the following: when the number of sets number changes ("onchange"), it sends a custom event, which is caught by the parent, triggering the following behavior. The parent will count the number of current inputs, compare it to the number of sets in the event, and determine whether to add or remove inputs. No need to store state, and no need to touch values. 
 4. [x] When the plus input is pressed, this triggers an event called something like "add set" and this should naturally trigger the "onchange" of the "number of sets input" requiring no extra work.
-5. [ ] New weight renders a new tuple of weight and sets.
+5. [x] New weight renders a new tuple of weight and sets.
 6. [ ] Finish will make propagate to the parent, where it will be handled.
 7. [ ] The track-exercise will catch the above event, and read the data, and remove the form itself, and add back a start-exercise element.
 8. [ ] Then, I will create the "exercises" custom component. Which will contain an "exercise" piece of html.
