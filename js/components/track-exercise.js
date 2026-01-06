@@ -4,6 +4,25 @@ import { Events } from "../events.js"
 class TrackExercise extends HTMLElement {
     initialData = null
 
+    static mainTemplate = Object.assign(document.createElement('template'), {
+        innerHTML: /*html*/`
+        <form class="exercise-form">
+            <div slot="header">
+                <h1 contentEditable></h1>
+                <sl-icon-button name="x" label="Exit"></sl-icon-button>
+            </div>
+
+            <!-- SetGroups -->
+            <div class="controls">
+                <sl-input label="Comment" placeholder="Add a comment?" name="comment"></sl-input>
+                <div class="actions">
+                    <sl-button variant="primary" outline id="add-weight-btn">New weight</sl-button>
+                    <sl-button type="submit" variant="primary">Finish</sl-button>
+                </div>
+            </div>
+        </form>`
+    })
+
 
     connectedCallback() {
         const exerciseName = this.getAttribute('name') || 'Exercise'
@@ -25,22 +44,7 @@ class TrackExercise extends HTMLElement {
     }
 
     dom(exerciseName) {
-        const main = document.createRange().createContextualFragment(/*html*/`
-        <form class="exercise-form">
-            <div slot="header">
-                <h1 contentEditable></h1>
-                <sl-icon-button name="x" label="Exit"></sl-icon-button>
-            </div>
-
-            <!-- SetGroups -->
-            <div class="controls">
-                <sl-input label="Comment" placeholder="Add a comment?" name="comment"></sl-input>
-                <div class="actions">
-                    <sl-button variant="primary" outline id="add-weight-btn">New weight</sl-button>
-                    <sl-button type="submit" variant="primary">Finish</sl-button>
-                </div>
-            </div>
-        </form>`);
+        const main = TrackExercise.mainTemplate.content.cloneNode(true)
 
         main.querySelector('h1')
             .textContent = exerciseName
