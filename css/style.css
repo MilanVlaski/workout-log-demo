@@ -100,6 +100,12 @@ start-exercise {
     justify-content: space-between;
 }
 
+.workout-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--vertical-spacing);
+}
+
 .exercise-form [slot='header'] {
     display: flex;
     align-items: center;
@@ -114,6 +120,6 @@ start-exercise {
     font-size: var(--sl-font-size-large);
 }
 
-.set-group > :not(first-child) {
+.set-group> :not(first-child) {
     margin-top: var(--vertical-spacing);
 }
