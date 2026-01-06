@@ -13,10 +13,10 @@ class TrackExercise extends HTMLElement {
                 weight: "120kg",
                 sets: [1, 2, 3, 5, 1, 1, 5, 5, 5]
             },
-            {
-                weight: "120kg",
-                sets: [1, 2, 3, 5, 1, 1, 5, 5, 5]
-            },
+                // {
+                //     weight: "120kg",
+                //     sets: [1, 2, 3, 5, 1, 1, 5, 5, 5]
+                // },
             ],
             comment: "Bla bla bla"
         }
@@ -28,13 +28,13 @@ class TrackExercise extends HTMLElement {
         const main = document.createRange().createContextualFragment(/*html*/`
         <form class="exercise-form">
             <div slot="header">
-                <h1 contentEditable>${exerciseName}</h1>
+                <h1 contentEditable></h1>
                 <sl-icon-button name="x" label="Exit"></sl-icon-button>
             </div>
 
             <!-- SetGroups -->
             <div class="controls">
-                <sl-input label="Comment" placeholder="Add a comment?" name="comment" value="${this.initialData?.comment || ''}"></sl-input>
+                <sl-input label="Comment" placeholder="Add a comment?" name="comment"></sl-input>
                 <div class="actions">
                     <sl-button variant="primary" outline id="add-weight-btn">New weight</sl-button>
                     <sl-button type="submit" variant="primary">Finish</sl-button>
@@ -42,13 +42,18 @@ class TrackExercise extends HTMLElement {
             </div>
         </form>`);
 
+        main.querySelector('h1')
+            .textContent = exerciseName
+
         const form = main.querySelector('form');
         const controls = main.querySelector('.controls');
+
+        main.querySelector('[name="comment"')
+            .value = this.initialData?.comment || ''
         const setGroups = this.initialData?.setsWithWeight || [null];
 
-        setGroups.forEach(data => {
-            form.insertBefore(this.setGroup(data), controls);
-        });
+
+        setGroups.forEach(data => { form.insertBefore(this.setGroup(data), controls); });
 
         return main;
     }
@@ -64,10 +69,17 @@ class TrackExercise extends HTMLElement {
                         <sl-icon name="plus"></sl-icon>
                     </sl-button>
                 </div>
-                <sl-input placeholder="Weight" name="weight" class="weight" value="${group?.weight || ''}"></sl-input>
+                <sl-input placeholder="Weight" name="weight" class="weight"></sl-input>
             </div>
-            <sl-input label="Number of sets" type="number" class="set-counter" value="${group?.sets?.length || 1}" min="1" max="12"></sl-input>
+            <sl-input label="Number of sets" type="number" class="set-counter" min="1" max="12"></sl-input>
         </div>`);
+
+        const setCounter = main.querySelector('.set-counter')
+
+        main.querySelector('[name="weight"')
+            .value = group?.weight || ''
+
+        setCounter.value = group?.sets?.length || 1
 
         const repss = main.querySelector('.repss');
         const plusBtn = main.querySelector('sl-button.reps');
@@ -76,7 +88,6 @@ class TrackExercise extends HTMLElement {
 
         // BEHAVIOR
 
-        const setCounter = main.querySelector('.set-counter')
         setCounter.addEventListener('sl-change', (event) => {
             // 2. Create the custom event
             setCounter.dispatchEvent(new CustomEvent(Events.SET_COUNT_CHANGED, {
@@ -141,10 +152,7 @@ class TrackExercise extends HTMLElement {
         const fragment = document.createDocumentFragment();
 
         items.forEach(val => {
-            const input = document.createRange().createContextualFragment(/*html*/`
-            <sl-input class="reps" name="reps" value="${val}"></sl-input>
-        `);
-            fragment.appendChild(input);
+            fragment.appendChild(el('sl-input', { className: 'reps', name: 'reps', value: val }));
         });
 
         return fragment;

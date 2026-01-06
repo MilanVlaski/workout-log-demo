@@ -1,3 +1,7 @@
+## Using <template>
+- [ ] Move template literals (${}) from code, to programmatic setting.
+- [ ] Use templates instead of strings.
+
 ## Reasonable event handling
 
 1. A component is either a Web Component, or a function returning a DocumentFragment.
