@@ -148,7 +148,6 @@ class TrackExercise extends HTMLElement {
             });
         }
 
-        this.setGroup
         return main;
     }
 
