@@ -1,11 +1,10 @@
-import { el } from "../utils.js"
+import { el, template } from "../utils.js"
 import { Events } from "../events.js"
 
 class TrackExercise extends HTMLElement {
     initialData = null
 
-    static mainTemplate = el('template', {
-        innerHTML: /*html*/`
+    static mainTemplate = template(/*html*/`
         <form class="exercise-form">
             <div slot="header">
                 <h1 contentEditable></h1>
@@ -21,10 +20,9 @@ class TrackExercise extends HTMLElement {
                 </div>
             </div>
         </form>`
-    })
+    )
 
-    static setGroupTemplate = el('template', {
-        innerHTML: /*html*/`
+    static setGroupTemplate = template(/*html*/`
         <div class="set-group">
             <div class="set">
                 <div class="repss">
@@ -37,7 +35,7 @@ class TrackExercise extends HTMLElement {
             </div>
             <sl-input label="Number of sets" type="number" class="set-counter" min="1" max="12"></sl-input>
         </div>`
-    })
+    )
 
 
     connectedCallback() {

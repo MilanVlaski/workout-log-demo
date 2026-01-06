@@ -18,3 +18,4 @@
  * });
  */
 export function el(tag, props) { return Object.assign(document.createElement(tag), props) }
+export function template(html) {return el('template', {innerHTML: html})}
