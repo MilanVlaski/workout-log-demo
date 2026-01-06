@@ -15,7 +15,7 @@ class TrackExercise extends HTMLElement {
             <div class="controls">
                 <sl-input label="Comment" placeholder="Add a comment?" name="comment"></sl-input>
                 <div class="actions">
-                    <sl-button variant="primary" outline id="add-weight-btn">New weight</sl-button>
+                    <sl-button variant="primary" outline id="add-weight">New weight</sl-button>
                     <sl-button type="submit" variant="primary">Finish</sl-button>
                 </div>
             </div>
@@ -54,10 +54,10 @@ class TrackExercise extends HTMLElement {
             comment: "Bla bla bla"
         }
 
-        this.replaceChildren(this.dom(exerciseName));
+        this.replaceChildren(this.main(exerciseName));
     }
 
-    dom(exerciseName) {
+    main(exerciseName) {
         const main = TrackExercise.mainTemplate.content.cloneNode(true)
 
         main.querySelector('h1').textContent = exerciseName
@@ -71,6 +71,16 @@ class TrackExercise extends HTMLElement {
 
 
         setGroups.forEach(data => { form.insertBefore(this.setGroup(data), controls); });
+
+        const addWeightButton = main.querySelector('#add-weight')
+
+        addWeightButton.addEventListener('click',
+            () => { addWeightButton.dispatchEvent(new CustomEvent(Events.ADD_WEIGHT, { bubbles: true, })) }
+        )
+
+        form.addEventListener(Events.ADD_WEIGHT, () => {
+            form.insertBefore(this.setGroup(), controls)
+        })
 
         return main;
     }
