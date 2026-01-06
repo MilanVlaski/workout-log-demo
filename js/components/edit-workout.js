@@ -33,12 +33,10 @@ class EditWorkout extends HTMLElement {
 
             if (e.target.getAttribute('action') === 'startExercise') {
 
-                console.log(Object.fromEntries(e.formData))
                 workout.querySelector('start-exercise').remove()
-                const exercise = e.formData.get('exercise')
 
                 const trackExerciseELement = document.createElement('track-exercise')
-                trackExerciseELement.setAttribute('name', exercise)
+                trackExerciseELement.setAttribute('name', e.formData.get('exercise'))
 
                 workout.appendChild(trackExerciseELement)
             }
