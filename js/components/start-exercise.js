@@ -35,8 +35,9 @@ class StartExercise extends HTMLElement {
           bubbles: true,
           detail: { exercise: data.get('exercise') }
         })
-      );
-    });
+      )
+      form.reset()
+    })
 
 
   }

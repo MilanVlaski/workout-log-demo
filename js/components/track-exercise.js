@@ -7,7 +7,7 @@ export class TrackExercise extends HTMLElement {
     static mainTemplate = template(/*html*/`
         <form class="exercise-form">
             <div slot="header">
-                <h1 contentEditable></h1>
+                <h3 contentEditable></h3>
                 <sl-icon-button name="x" label="Exit"></sl-icon-button>
             </div>
 
@@ -60,7 +60,7 @@ export class TrackExercise extends HTMLElement {
     main(exerciseName) {
         const main = TrackExercise.mainTemplate.content.cloneNode(true)
 
-        main.querySelector('h1').textContent = exerciseName
+        main.querySelector('h3').textContent = exerciseName
 
         const form = main.querySelector('form');
         const controls = main.querySelector('.controls');

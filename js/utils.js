@@ -35,3 +35,9 @@ export function el(tag, props) { return Object.assign(document.createElement(tag
  * document.querySelector('tbody').appendChild(clone);
  */
 export function template(html) { return el('template', { innerHTML: html }) }
+
+export function debugNode(node, text) {
+    const temp = document.createElement('div')
+    temp.appendChild(node.cloneNode(true))
+    console.log(`${text} ${temp.innerHTML}`)
+}

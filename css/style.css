@@ -112,8 +112,13 @@ start-exercise {
     justify-content: space-between;
 }
 
-.exercise-form [slot='header'] h1 {
+.exercise-form h3 {
     font-size: 1.1rem;
+    margin: 0;
+}
+
+.sets p {
+    margin: 0;
 }
 
 .exercise-form [slot='header'] sl-icon-button {
@@ -122,4 +127,8 @@ start-exercise {
 
 .set-group> :not(first-child) {
     margin-top: var(--vertical-spacing);
+}
+
+workout-log h2 {
+    font-size: 1rem;
 }

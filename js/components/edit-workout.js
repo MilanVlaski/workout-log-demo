@@ -2,6 +2,7 @@ import { template, el } from "./../utils.js"
 import { Events } from "./../events.js"
 import "./start-exercise.js"
 import { TrackExercise } from "./track-exercise.js";
+import "./workout-log.js"
 
 class EditWorkout extends HTMLElement {
 
@@ -13,7 +14,8 @@ class EditWorkout extends HTMLElement {
         </div>
 
         <start-exercise></start-exercise>
-
+        <sl-divider></sl-divider>
+        <workout-log></workout-log>
     </sl-card>
     `)
 
@@ -25,13 +27,14 @@ class EditWorkout extends HTMLElement {
         const main = EditWorkout.mainTemplate.content.cloneNode(true)
 
         const workout = main.querySelector('.workout')
+        const divider = main.querySelector('sl-divider')
 
         workout.querySelector('h1').textContent = 'Workout'
 
         workout.addEventListener(Events.START_EXERCISE, (e) => {
             const trackExerciseELement = new TrackExercise()
             trackExerciseELement.setAttribute('name', e.detail.exercise)
-            workout.appendChild(trackExerciseELement)
+            workout.insertBefore(trackExerciseELement, divider)
         })
 
         workout.addEventListener(Events.FINISH_WORKOUT, (e) => {
