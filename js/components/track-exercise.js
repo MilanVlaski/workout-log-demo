@@ -79,7 +79,9 @@ export class TrackExercise extends HTMLElement {
         )
 
         form.addEventListener(Events.ADD_WEIGHT, () => {
-            form.insertBefore(this.setGroup(), controls)
+            const setGroup = this.setGroup()
+            form.insertBefore(document.createElement('sl-divider'), controls)
+            form.insertBefore(setGroup, controls)
         })
 
         form.addEventListener('submit', (e) => {
@@ -106,6 +108,9 @@ export class TrackExercise extends HTMLElement {
 
             form.dispatchEvent(new CustomEvent(Events.FINISH_WORKOUT, { detail: finalData }));
         })
+
+        main.querySelector('[name="x"]')
+            .onclick = this.remove.bind(this);
 
         return main;
     }
