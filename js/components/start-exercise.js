@@ -1,3 +1,5 @@
+import { Events } from "../events.js";
+
 /**
  * Depends on shoelace.
  * The combination of input and button is somewhat of a hack, but can in theory
@@ -13,12 +15,30 @@ class StartExercise extends HTMLElement {
           }
         </style>
 
-        <form action="startExercise" method="post">
-          <sl-input label="Start New Exercise" placeholder="Exercise name" name="exercise" required>
-            <sl-button type="submit" variant="primary" slot="suffix">Start</sl-button>
-          </sl-input>
-        </form>
+        <div id="startExercise">
+          <form action="startExercise" method="post">
+            <sl-input label="Start New Exercise" placeholder="Exercise name" name="exercise" required>
+              <sl-button type="submit" variant="primary" slot="suffix">Start</sl-button>
+            </sl-input>
+          </form>
+        </div>
       `
+
+    startExercise.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = new FormData(form);
+
+      form.dispatchEvent(
+        new CustomEvent(Events.START_EXERCISE, {
+          bubbles: true,
+          detail: { exercise: data.get('exercise') }
+        })
+      );
+    });
+
+
   }
 }
 

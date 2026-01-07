@@ -1,7 +1,7 @@
 import { template, el } from "./../utils.js"
 import { Events } from "./../events.js"
 import "./start-exercise.js"
-import "./track-exercise.js"
+import { TrackExercise } from "./track-exercise.js";
 
 class EditWorkout extends HTMLElement {
 
@@ -28,18 +28,10 @@ class EditWorkout extends HTMLElement {
 
         workout.querySelector('h1').textContent = 'Workout'
 
-        workout.addEventListener('formdata', (e) => {
-            e.preventDefault()
-
-            if (e.target.getAttribute('action') === 'startExercise') {
-
-                workout.querySelector('start-exercise').remove()
-
-                const trackExerciseELement = document.createElement('track-exercise')
-                trackExerciseELement.setAttribute('name', e.formData.get('exercise'))
-
-                workout.appendChild(trackExerciseELement)
-            }
+        workout.addEventListener(Events.START_EXERCISE, (e) => {
+            const trackExerciseELement = new TrackExercise()
+            trackExerciseELement.setAttribute('name', e.detail.exercise)
+            workout.appendChild(trackExerciseELement)
         })
 
         workout.addEventListener(Events.FINISH_WORKOUT, (e) => {

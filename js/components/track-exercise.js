@@ -1,7 +1,7 @@
 import { el, template } from "../utils.js"
 import { Events } from "../events.js"
 
-class TrackExercise extends HTMLElement {
+export class TrackExercise extends HTMLElement {
     initialData = null
 
     static mainTemplate = template(/*html*/`
