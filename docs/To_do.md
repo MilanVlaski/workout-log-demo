@@ -1,3 +1,7 @@
+## Patterns
+1. Just get rid of fragment usages, as it's too heavy.
+2. Add more templates, as they're the most correct way to reuse pieces. Consider having a JS file which keeps reusable templates.
+
 ## Reasonable event handling
 
 1. A component is either a Web Component, or a function returning a DocumentFragment.

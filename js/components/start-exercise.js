@@ -24,6 +24,7 @@ class StartExercise extends HTMLElement {
         </div>
       `
 
+      // TODO No reason for this, anymore.
     startExercise.addEventListener('submit', (e) => {
       e.preventDefault();
 

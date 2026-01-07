@@ -128,6 +128,7 @@ export class TrackExercise extends HTMLElement {
 
         const repss = main.querySelector('.repss');
         const plusBtn = main.querySelector('sl-button.reps');
+        // setGroupData?.sets.forEach((data) => repss.insertBefore(this.reps(data)))
         repss.insertBefore(this.reps(setGroupData?.sets || []), plusBtn);
 
 
@@ -156,9 +157,10 @@ export class TrackExercise extends HTMLElement {
             const currentInputs = Array.from(repss.querySelectorAll('sl-input.reps'));
 
             if (currentInputs.length < targetCount) {
-                // Add inputs
+                // TODO NO need for fragment
                 const fragment = document.createDocumentFragment();
                 for (let i = currentInputs.length; i < targetCount; i++) {
+                    // P
                     fragment.appendChild(el('sl-input', { className: 'reps', name: 'reps' }));
                 }
                 repss.insertBefore(fragment, plusBtn);
@@ -193,6 +195,7 @@ export class TrackExercise extends HTMLElement {
 
     reps(sets) {
         const items = sets.length > 0 ? sets : [""];
+        // TODO No need for fragment
         const fragment = document.createDocumentFragment();
 
         items.forEach(val => {
