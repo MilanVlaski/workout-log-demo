@@ -4,25 +4,6 @@ export class WorkoutLog extends HTMLElement {
 
     initialData = null
 
-    static skeleton = template(/*html*/`
-        <fieldset class="sets">
-        <!-- 
-            <legend>Exercise</legend>
-            
-            <div class="set"> // name is nonsense, should be "setGroup"
-                <div class="repss">
-                    <sl-input class="reps" value="12"></sl-input>
-                    <sl-input class="reps" value="11"></sl-input>
-                    <sl-input class="reps" value="9"></sl-input>
-                </div>
-
-                <sl-input placeholder="Weight" name="weight" value="120kg"></sl-input>
-            </div>
-                -->
-
-        </fieldset>    
-    `)
-
     connectedCallback() {
         // this.initialData = {
         //     exercises: [{

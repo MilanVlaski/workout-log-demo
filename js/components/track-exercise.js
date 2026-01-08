@@ -163,10 +163,8 @@ export class TrackExercise extends HTMLElement {
             const currentInputs = Array.from(repss.querySelectorAll('sl-input.reps'));
 
             if (currentInputs.length < targetCount) {
-                // TODO NO need for fragment
                 const fragment = document.createDocumentFragment();
                 for (let i = currentInputs.length; i < targetCount; i++) {
-                    // P
                     fragment.appendChild(el('sl-input', { className: 'reps', name: 'reps' }));
                 }
                 repss.insertBefore(fragment, plusBtn);
