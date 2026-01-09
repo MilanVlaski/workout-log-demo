@@ -22,8 +22,13 @@
 8. [ ] Then, I will create the "exercises" custom component. Which will contain an "exercise" piece of html.
 9. [ ] When the finish form gets submitted, the parent will catch it and somehow tell the "exercises" component to add an exercise, with the proper data, etc.
 ---
-- [ ] Make sure the reps are not empty.
-- [ ] Make sure the weight is not rendered in 
+- [ ] Add x button for individual exercises
+- [ ] Put the workout log in sessionstorage.
+- [ ] Make the workout log page. Just text.
+- [ ] Workout log has an export option, but it's not available for demo.
+- [ ] Maybe make a workout in a log editable, by reading the workout data, and loading it into the editing page. Can go in the query values. When the user is done, they can perform a PUT on the backend, where we will fetch the thing. 
+- [x] Make sure the reps are not empty.
+- [x] Make sure the weight is not rendered in 
 - [x] Figure out how forms work.
   - Shoelace doesn't affect canonical HTML forms, but it does provide helpers for cases of overriding default form behavior (using fetch + form data etc)
 - [ ] Figure out how localization works, as it affects params being passed as strings..

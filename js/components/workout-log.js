@@ -24,33 +24,33 @@ export class WorkoutLog extends HTMLElement {
 
     connectedCallback() {
 
-        this.initialData = {
-            exercises: [
-                {
-                    exercise: 'Squat',
-                    setsWithWeight: [
-                        { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-                        { weight: '130kg', sets: [10, 9, 3] }
-                    ],
-                    comment: 'Form was shaky.'
-                },
-                {
-                    exercise: 'Squat',
-                    setsWithWeight: [
-                        { weight: '120kg', sets: [5, 5, 5, 4,] },
-                        { weight: '130kg', sets: [10, 9, 3] }
-                    ],
-                },
-                {
-                    exercise: 'Pullups',
-                    setsWithWeight: [
-                        { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-                        { weight: '130kg', sets: [10, 9, 3] }
-                    ],
-                    comment: 'Felt strong today!'
-                }
-            ]
-        }
+        // this.initialData = {
+        //     exercises: [
+        //         {
+        //             exercise: 'Squat',
+        //             setsWithWeight: [
+        //                 { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+        //                 { weight: '130kg', sets: [10, 9, 3] }
+        //             ],
+        //             comment: 'Form was shaky.'
+        //         },
+        //         {
+        //             exercise: 'Squat',
+        //             setsWithWeight: [
+        //                 { weight: '120kg', sets: [5, 5, 5, 4,] },
+        //                 { weight: '130kg', sets: [10, 9, 3] }
+        //             ],
+        //         },
+        //         {
+        //             exercise: 'Pullups',
+        //             setsWithWeight: [
+        //                 { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+        //                 { weight: '130kg', sets: [10, 9, 3] }
+        //             ],
+        //             comment: 'Felt strong today!'
+        //         }
+        //     ]
+        // }
 
         const container = WorkoutLog.mainTemplate.content.cloneNode(true).firstElementChild
 
@@ -119,9 +119,6 @@ export class WorkoutLog extends HTMLElement {
                 }
             });
 
-            // Log the final data for verification
-            console.log('Final workout data:', finalData);
-
             // Dispatch the event with the final data
             container.dispatchEvent(new CustomEvent(Events.FINISH_WORKOUT, {
                 detail: finalData,
@@ -135,9 +132,7 @@ export class WorkoutLog extends HTMLElement {
     exercise(exercise) {
         const skeleton = document.createElement('div')
         skeleton.classList.add('sets')
-        // Handle both 'exercise' and 'name' properties for compatibility
-        const exerciseName = exercise.exercise || exercise.name || 'Unknown Exercise';
-        skeleton.appendChild(el('p', { textContent: exerciseName }))
+        skeleton.appendChild(el('p', { textContent: exercise.exercise }))
 
         // TODO set className is nonsense. It's "exercise"
         exercise.setsWithWeight?.forEach((setGroup) => {

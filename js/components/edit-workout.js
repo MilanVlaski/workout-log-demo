@@ -75,6 +75,7 @@ class EditWorkout extends HTMLElement {
         // Listen for workout finish event to show toast notification
         workout.addEventListener(Events.FINISH_WORKOUT, (e) => {
             notify('Workout completed successfully!', 'success', 'check2-circle', 5000);
+            // TODO append the log in session storage
         })
 
         return main
