@@ -7,7 +7,7 @@ export class TrackExercise extends HTMLElement {
     static mainTemplate = template(/*html*/`
         <form class="exercise-form">
             <div slot="header">
-                <h3 contentEditable></h3>
+                <h2 contentEditable></h2>
                 <sl-icon-button name="x" label="Exit"></sl-icon-button>
             </div>
 
@@ -19,7 +19,11 @@ export class TrackExercise extends HTMLElement {
                     <sl-button type="submit" variant="primary">Finish</sl-button>
                 </div>
             </div>
-        </form>`
+        </form>
+    <template id="reps-input">
+        <sl-input class="reps" name="reps" required></sl-input>
+    </template>
+        `
     )
 
     static setGroupTemplate = template(/*html*/`
@@ -60,7 +64,7 @@ export class TrackExercise extends HTMLElement {
     main(exerciseName) {
         const main = TrackExercise.mainTemplate.content.cloneNode(true)
 
-        main.querySelector('h3').textContent = exerciseName
+        main.querySelector('h2').textContent = exerciseName
 
         const form = main.querySelector('form');
         const controls = main.querySelector('.controls');
@@ -99,14 +103,15 @@ export class TrackExercise extends HTMLElement {
                     .map(val => isNaN(val) ? val : parseInt(val, 10));
 
                 return { weight, sets };
-            });
+            })
 
             const finalData = {
+                exercise: form.querySelector('h2').textContent,
                 setsWithWeight: setGroups,
                 comment: form.querySelector('[name="comment"]')?.value || ""
             };
 
-            form.dispatchEvent(new CustomEvent(Events.FINISH_WORKOUT, { detail: finalData }));
+            form.dispatchEvent(new CustomEvent(Events.FINISH_EXERCISE, { detail: finalData, bubbles: true }));
         })
 
         main.querySelector('[name="x"]')
@@ -134,6 +139,11 @@ export class TrackExercise extends HTMLElement {
 
         // 2. Loop and insert
         setsToRender.forEach((val) => {
+            // TODO reps
+            // const repsInput = template('<sl-input class="reps" name="reps" required></sl-input>')
+            // .content.cloneNode(true).firstElementOfChild
+            // console.log(repsInput)
+            // repsInput.setAttribute('value', val)
             repss.insertBefore(el('sl-input', { className: 'reps', name: 'reps', value: val }), plusBtn);
         });
 
@@ -165,7 +175,8 @@ export class TrackExercise extends HTMLElement {
             if (currentInputs.length < targetCount) {
                 const fragment = document.createDocumentFragment();
                 for (let i = currentInputs.length; i < targetCount; i++) {
-                    fragment.appendChild(el('sl-input', { className: 'reps', name: 'reps' }));
+                    // TODO reps
+                    fragment.appendChild(el('sl-input', {className: 'reps', name: 'reps'}));
                 }
                 repss.insertBefore(fragment, plusBtn);
             } else {

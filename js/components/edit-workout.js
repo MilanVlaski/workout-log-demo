@@ -38,9 +38,10 @@ class EditWorkout extends HTMLElement {
             workout.insertBefore(trackExerciseELement, divider)
         })
 
-        workout.addEventListener(Events.FINISH_WORKOUT, (e) => {
-            // add element to log-exercise
-            // workoutLog.addExercise(data...)
+        workout.addEventListener(Events.FINISH_EXERCISE, (e) => {
+            document.querySelector('workout-log')
+                .addExercise(e.detail)
+            e.target.remove()
         })
 
         return main

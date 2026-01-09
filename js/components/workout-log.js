@@ -1,8 +1,10 @@
 import { template, el } from "./../utils.js"
 
+
 export class WorkoutLog extends HTMLElement {
 
     initialData = null
+
 
     connectedCallback() {
         // this.initialData = {
@@ -21,21 +23,22 @@ export class WorkoutLog extends HTMLElement {
         //     comment: "Form was shaky."
         // }
 
-        const fragment = document.createDocumentFragment()
+        const container = document.createElement('div')
+        container.className = 'workout-log'
 
-        fragment.appendChild(el('h2', { textContent: "Workout log" }))
+        container.appendChild(el('h2', { textContent: "Workout log" }))
 
         this.initialData?.exercises.forEach(exercise => {
-            fragment.appendChild(this.exercise(exercise))
+            container.appendChild(this.exercise(exercise))
         });
 
-        this.replaceChildren(fragment)
+        this.replaceChildren(container)
     }
 
     exercise(exercise) {
         const skeleton = document.createElement('div')
         skeleton.classList.add('sets')
-        skeleton.appendChild(el('p', { textContent: exercise.name }))
+        skeleton.appendChild(el('p', { textContent: exercise.exercise }))
 
         // TODO set className is nonsense. It's "exercise"
         exercise.setsWithWeight.forEach((setGroup) => {
@@ -57,13 +60,19 @@ export class WorkoutLog extends HTMLElement {
         weight.querySelector('[name="weight"]').value = setGroup.weight
 
         setGroup.sets.forEach((reps) => {
-            repss.appendChild(el('sl-input', { className: 'reps', value: reps }))
+            // TODO reps
+            repss.appendChild(el('sl-input', { className: 'reps', name: 'reps', value: reps }))
         })
         setGroupDiv.appendChild(repss)
         setGroupDiv.appendChild(weight)
         fragment.appendChild(setGroupDiv)
 
         return fragment
+    }
+
+    addExercise(exercise) {
+        document.querySelector('.workout-log')
+        .appendChild(this.exercise(exercise))
     }
 
 }
