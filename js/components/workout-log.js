@@ -24,33 +24,26 @@ export class WorkoutLog extends HTMLElement {
 
     connectedCallback() {
 
-        // this.initialData = {
-        //     exercises: [
-        //         {
-        //             exercise: 'Squat',
-        //             setsWithWeight: [
-        //                 { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-        //                 { weight: '130kg', sets: [10, 9, 3] }
-        //             ],
-        //             comment: 'Form was shaky.'
-        //         },
-        //         {
-        //             exercise: 'Squat',
-        //             setsWithWeight: [
-        //                 { weight: '120kg', sets: [5, 5, 5, 4,] },
-        //                 { weight: '130kg', sets: [10, 9, 3] }
-        //             ],
-        //         },
-        //         {
-        //             exercise: 'Pullups',
-        //             setsWithWeight: [
-        //                 { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-        //                 { weight: '130kg', sets: [10, 9, 3] }
-        //             ],
-        //             comment: 'Felt strong today!'
-        //         }
-        //     ]
-        // }
+        this.initialData = {
+            exercises: [
+                {
+                    exercise: 'Squat',
+                    setsWithWeight: [
+                        { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+                        { weight: '130kg', sets: [10, 9, 3] }
+                    ],
+                    comment: 'Form was shaky.'
+                },
+                {
+                    exercise: 'Pullups',
+                    setsWithWeight: [
+                        { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+                        { weight: '130kg', sets: [10, 9, 3] }
+                    ],
+                    comment: 'Felt strong today!'
+                }
+            ]
+        }
 
         const container = WorkoutLog.mainTemplate.content.cloneNode(true).firstElementChild
 
@@ -132,7 +125,17 @@ export class WorkoutLog extends HTMLElement {
     exercise(exercise) {
         const skeleton = document.createElement('div')
         skeleton.classList.add('sets')
-        skeleton.appendChild(el('p', { textContent: exercise.exercise }))
+
+        const header = document.createElement('header')
+
+        // Create X button using proper Shoelace component creation
+        const xButton = document.createElement('sl-icon-button')
+        xButton.setAttribute('name', 'x')
+        xButton.setAttribute('label', 'Exit')
+
+        header.appendChild(xButton)
+        header.appendChild(el('p', { textContent: exercise.exercise }))
+        skeleton.appendChild(header)
 
         // TODO set className is nonsense. It's "exercise"
         exercise.setsWithWeight?.forEach((setGroup) => {
@@ -148,6 +151,9 @@ export class WorkoutLog extends HTMLElement {
             })
             skeleton.appendChild(commentInput)
         }
+
+        // Use onclick like track-exercise component for better compatibility
+        xButton.onclick = () => skeleton.remove()
 
         return skeleton
     }

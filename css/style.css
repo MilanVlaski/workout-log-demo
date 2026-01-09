@@ -138,3 +138,10 @@ start-exercise {
 .set + .set {
     margin-top: var(--vertical-spacing);
 }
+
+.sets header {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+}
