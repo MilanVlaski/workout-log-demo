@@ -27,7 +27,14 @@ export class WorkoutLog extends HTMLElement {
         this.initialData = {
             exercises: [
                 {
-                    name: 'Squat',
+                    exercise: 'Squat',
+                    setsWithWeight: [
+                        { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+                        { weight: '130kg', sets: [10, 9, 3] }
+                    ]
+                },
+                {
+                    exercise: 'Pullups',
                     setsWithWeight: [
                         { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
                         { weight: '130kg', sets: [10, 9, 3] }
@@ -55,7 +62,56 @@ export class WorkoutLog extends HTMLElement {
         this.addEventListener(`submit`, (e) => {
             e.preventDefault();
 
-            container.dispatchEvent(new CustomEvent(Events.FINISH_EXERCISE, { detail: finalData, bubbles: true }));
+            // Gather all exercise data from the form
+            const finalData = { exercises: [] };
+
+            // Find all exercise elements
+            const exerciseElements = container.querySelectorAll('.sets');
+
+            exerciseElements.forEach(exerciseElement => {
+                const exerciseName = exerciseElement.querySelector('p')?.textContent || 'Unknown Exercise';
+
+                const exerciseData = {
+                    name: exerciseName,
+                    setsWithWeight: []
+                };
+
+                // Find all set groups within this exercise
+                const setGroups = exerciseElement.querySelectorAll('.set');
+
+                setGroups.forEach(setGroup => {
+                    const weightInput = setGroup.querySelector('.weight');
+                    const weight = weightInput ? weightInput.value : null;
+
+                    // Find all rep inputs in this set group
+                    const repInputs = setGroup.querySelectorAll('.reps');
+                    const sets = [];
+
+                    repInputs.forEach(repInput => {
+                        sets.push(parseInt(repInput.value) || 0);
+                    });
+
+                    if (sets.length > 0) {
+                        exerciseData.setsWithWeight.push({
+                            weight: weight,
+                            sets: sets
+                        });
+                    }
+                });
+
+                if (exerciseData.setsWithWeight.length > 0) {
+                    finalData.exercises.push(exerciseData);
+                }
+            });
+
+            // Log the final data for verification
+            console.log('Final workout data:', finalData);
+
+            // Dispatch the event with the final data
+            container.dispatchEvent(new CustomEvent(Events.FINISH_WORKOUT, {
+                detail: finalData,
+                bubbles: true
+            }));
         })
 
         this.replaceChildren(container)
@@ -64,10 +120,12 @@ export class WorkoutLog extends HTMLElement {
     exercise(exercise) {
         const skeleton = document.createElement('div')
         skeleton.classList.add('sets')
-        skeleton.appendChild(el('p', { textContent: exercise.exercise }))
+        // Handle both 'exercise' and 'name' properties for compatibility
+        const exerciseName = exercise.exercise || exercise.name || 'Unknown Exercise';
+        skeleton.appendChild(el('p', { textContent: exerciseName }))
 
         // TODO set className is nonsense. It's "exercise"
-        exercise.setsWithWeight.forEach((setGroup) => {
+        exercise.setsWithWeight?.forEach((setGroup) => {
             skeleton.appendChild(this.setGroup(setGroup))
         })
 

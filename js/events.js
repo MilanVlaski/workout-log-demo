@@ -5,4 +5,5 @@ export const Events = Object.freeze({
   ADD_WEIGHT: 'addWeight',
   FINISH_EXERCISE: 'finishExercise',
   START_EXERCISE: 'startExercise',
+  FINISH_WORKOUT: 'finishWorkout'
 });
