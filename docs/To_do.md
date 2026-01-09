@@ -22,7 +22,9 @@
 8. [ ] Then, I will create the "exercises" custom component. Which will contain an "exercise" piece of html.
 9. [ ] When the finish form gets submitted, the parent will catch it and somehow tell the "exercises" component to add an exercise, with the proper data, etc.
 ---
-- [ ] Figure out how forms work.
+- [ ] Make sure the reps are not empty.
+- [ ] Make sure the weight is not rendered in 
+- [x] Figure out how forms work.
   - Shoelace doesn't affect canonical HTML forms, but it does provide helpers for cases of overriding default form behavior (using fetch + form data etc)
 - [ ] Figure out how localization works, as it affects params being passed as strings..
   - Localization requires some imports, and doesn't affect too many components, really.

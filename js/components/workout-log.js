@@ -1,3 +1,4 @@
+import { repsInputTemplate } from "../reps-input.js"
 import { template, el, clone } from "./../utils.js"
 
 
@@ -60,7 +61,7 @@ export class WorkoutLog extends HTMLElement {
         weight.querySelector('[name="weight"]').value = setGroup.weight
 
         setGroup.sets.forEach((reps) => {
-            const repsInput = clone('reps-input')
+            const repsInput = repsInputTemplate.cloneNode()
             repsInput.value = reps
             repss.appendChild(repsInput)
         })

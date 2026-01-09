@@ -1,4 +1,5 @@
 import { el, template, clone } from "../utils.js"
+import { repsInputTemplate } from "../reps-input.js"
 import { Events } from "../events.js"
 
 export class TrackExercise extends HTMLElement {
@@ -133,7 +134,7 @@ export class TrackExercise extends HTMLElement {
 
         // 2. Loop and insert
         setsToRender.forEach((val) => {
-            const repsInput = clone('reps-input')
+            const repsInput = repsInputTemplate.cloneNode(true)
             repsInput.value = val
             repss.insertBefore(repsInput, plusBtn);
         });
@@ -158,7 +159,7 @@ export class TrackExercise extends HTMLElement {
 
             if (currentInputs.length < targetCount) {
                 const fragment = document.createDocumentFragment();
-                const repsInput = clone('reps-input')
+                const repsInput = repsInputTemplate.cloneNode()
                 for (let i = currentInputs.length; i < targetCount; i++) {
                     fragment.appendChild(repsInput);
                 }
