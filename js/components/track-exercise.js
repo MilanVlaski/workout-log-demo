@@ -75,11 +75,7 @@ export class TrackExercise extends HTMLElement {
 
         const addWeightButton = main.querySelector('#add-weight')
 
-        addWeightButton.addEventListener('click',
-            () => { addWeightButton.dispatchEvent(new CustomEvent(Events.ADD_WEIGHT, { bubbles: true, })) }
-        )
-
-        form.addEventListener(Events.ADD_WEIGHT, () => {
+        addWeightButton.addEventListener('click', () => {
             const setGroup = this.setGroup()
             form.insertBefore(document.createElement('sl-divider'), controls)
             form.insertBefore(setGroup, controls)
@@ -93,6 +89,7 @@ export class TrackExercise extends HTMLElement {
                 const weightInput = group.querySelector('.weight');
                 const weight = weightInput ? weightInput.value : "";
 
+                // TODO if any set is null, give a warning.
                 // Use the class 'reps' which you assigned to the sl-input
                 const sets = Array.from(group.querySelectorAll('sl-input.reps'))
                     .map(input => input.value)
@@ -144,19 +141,12 @@ export class TrackExercise extends HTMLElement {
 
         // BEHAVIOR
 
-        setCounter.addEventListener('sl-change', (event) => {
-            // 2. Create the custom event
-            setCounter.dispatchEvent(new CustomEvent(Events.SET_COUNT_CHANGED, {
-                detail: { setCount: event.target.value },
-                bubbles: true,
-                // composed: true               // Allows the event to pass through Shadow DOM boundaries
-            }));
-        });
-
         const setGroup = main.querySelector('.set-group')
-        setGroup.addEventListener(Events.SET_COUNT_CHANGED, (e) => {
-            handleSetCountChange(e.detail.setCount)
-        })
+        setGroup.addEventListener('sl-change', (e) => {
+            if (e.target.classList.contains('set-counter')) {
+                handleSetCountChange(e.target.value);
+            }
+        });
 
         // If we want encapsulation, repss can be moved into a component which is told 
         // to execute a function similar to this one
