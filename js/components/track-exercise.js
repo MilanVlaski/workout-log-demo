@@ -181,11 +181,8 @@ export class TrackExercise extends HTMLElement {
             }
         }
 
+        // Since we don't remove the button, we don't need to reattach event listeners!
         plusBtn.addEventListener('click', () => {
-            plusBtn.dispatchEvent(new CustomEvent(Events.ADD_SETS, { bubbles: true, }))
-        })
-
-        setGroup.addEventListener(Events.ADD_SETS, () => {
             handleAddSets()
         })
 
