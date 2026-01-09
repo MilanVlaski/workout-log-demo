@@ -54,9 +54,10 @@ export class WorkoutLog extends HTMLElement {
         const setGroupDiv = el('div', { className: 'set' })
         const repss = el('div', { className: 'repss' })
 
-        const weight = template(/*html*/`<sl-input placeholder="Weight" name="weight" class="weight"></sl-input>`)
-            .content.cloneNode(true)
-        weight.querySelector('[name="weight"]').value = setGroup.weight
+        const weight = setGroup.weight ? template(/*html*/`<sl-input placeholder="Weight" name="weight" class="weight"></sl-input>`)
+            .content.cloneNode(true).firstElementChild 
+            : el('div')
+        weight.value = setGroup.weight
 
         setGroup.sets.forEach((reps) => {
             const repsInput = repsInputTemplate.cloneNode()

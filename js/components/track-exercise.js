@@ -159,9 +159,8 @@ export class TrackExercise extends HTMLElement {
 
             if (currentInputs.length < targetCount) {
                 const fragment = document.createDocumentFragment();
-                const repsInput = repsInputTemplate.cloneNode()
                 for (let i = currentInputs.length; i < targetCount; i++) {
-                    fragment.appendChild(repsInput);
+                    fragment.appendChild(repsInputTemplate.cloneNode());
                 }
                 repss.insertBefore(fragment, plusBtn);
             } else {
