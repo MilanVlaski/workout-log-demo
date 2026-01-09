@@ -2,36 +2,34 @@ import { repsInputTemplate } from "../reps-input.js"
 import { template, el, clone } from "./../utils.js"
 
 
+
 export class WorkoutLog extends HTMLElement {
+
+    static mainTemplate = template(/*html*/`
+    <div class="workout-log">
+        <h2>Workout Log</h2>
+
+        <!-- logs -->
+
+        <div class="actions">
+            <sl-button variant="danger" outline type="reset">Clear</sl-button>
+            <sl-button type="submit" variant="primary">Finish</sl-button>
+        </div>
+    </div>
+    `)
 
     initialData = null
 
 
     connectedCallback() {
-        // this.initialData = {
-        //     exercises: [{
-        //         name: 'Pullups',
-        //         // reps with weight
-        //         setsWithWeight: [{
-        //             weight: "120kg",
-        //             // reps
-        //             sets: [10, 9, 8, 7]
-        //         }, {
-        //             weight: "100kg",
-        //             sets: [11, 8, 8]
-        //         }],
-        //     }],
-        //     comment: "Form was shaky."
-        // }
 
-        const container = document.createElement('div')
-        container.className = 'workout-log'
+        const container = WorkoutLog.mainTemplate.content.cloneNode(true)
 
-        container.appendChild(el('h2', { textContent: "Workout log" }))
+        const actions = container.querySelector('.actions')
 
         this.initialData?.exercises.forEach(exercise => {
-            container.appendChild(this.exercise(exercise))
-        });
+            container.insertBefore(this.exercise(exercise), actions)
+        })
 
         this.replaceChildren(container)
     }
@@ -73,8 +71,9 @@ export class WorkoutLog extends HTMLElement {
     }
 
     addExercise(exercise) {
-        document.querySelector('.workout-log')
-        .appendChild(this.exercise(exercise))
+        const actions = this.querySelector('.actions')
+        this.querySelector('.workout-log')
+            .insertBefore(this.exercise(exercise), actions)
     }
 
 }

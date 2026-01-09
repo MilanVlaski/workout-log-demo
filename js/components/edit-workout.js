@@ -39,6 +39,7 @@ class EditWorkout extends HTMLElement {
                 const exercise = new FormData(e.target).get('exercise')
                 trackExerciseELement.setAttribute('name', exercise)
                 workout.insertBefore(trackExerciseELement, divider)
+                e.target.reset()
             }
         })
 

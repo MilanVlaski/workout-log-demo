@@ -130,3 +130,7 @@ start-exercise {
 .sets {
     margin-top: var(--vertical-spacing);
 }
+
+.workout-log .actions {
+    margin-top: var(--vertical-spacing);
+}
