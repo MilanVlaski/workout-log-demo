@@ -34,10 +34,10 @@ export class WorkoutLog extends HTMLElement {
                     ],
                     comment: 'Form was shaky.'
                 },
-                                {
+                {
                     exercise: 'Squat',
                     setsWithWeight: [
-                        { weight: '120kg', sets: [5, 5, 5, 4, ] },
+                        { weight: '120kg', sets: [5, 5, 5, 4,] },
                         { weight: '130kg', sets: [10, 9, 3] }
                     ],
                 },
@@ -107,6 +107,12 @@ export class WorkoutLog extends HTMLElement {
                         });
                     }
                 });
+
+                // Add comment if it exists
+                const commentInput = exerciseElement.querySelector('.exercise-comment');
+                if (commentInput && commentInput.value) {
+                    exerciseData.comment = commentInput.value;
+                }
 
                 if (exerciseData.setsWithWeight.length > 0) {
                     finalData.exercises.push(exerciseData);
