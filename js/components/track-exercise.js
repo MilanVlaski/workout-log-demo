@@ -1,4 +1,4 @@
-import { el, template } from "../utils.js"
+import { el, template, clone } from "../utils.js"
 import { Events } from "../events.js"
 
 export class TrackExercise extends HTMLElement {
@@ -20,9 +20,6 @@ export class TrackExercise extends HTMLElement {
                 </div>
             </div>
         </form>
-    <template id="reps-input">
-        <sl-input class="reps" name="reps" required></sl-input>
-    </template>
         `
     )
 
@@ -140,11 +137,9 @@ export class TrackExercise extends HTMLElement {
         // 2. Loop and insert
         setsToRender.forEach((val) => {
             // TODO reps
-            // const repsInput = template('<sl-input class="reps" name="reps" required></sl-input>')
-            // .content.cloneNode(true).firstElementOfChild
-            // console.log(repsInput)
-            // repsInput.setAttribute('value', val)
-            repss.insertBefore(el('sl-input', { className: 'reps', name: 'reps', value: val }), plusBtn);
+            const repsInput = clone('reps-input')
+            repsInput.value = val
+            repss.insertBefore(repsInput, plusBtn);
         });
 
 

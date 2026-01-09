@@ -41,3 +41,5 @@ export function debugNode(node, text) {
     temp.appendChild(node.cloneNode(true))
     console.log(`${text} ${temp.innerHTML}`)
 }
+
+export function clone(id) {return document.getElementById(id).content.cloneNode(true).firstElementChild}
