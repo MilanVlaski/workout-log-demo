@@ -126,3 +126,7 @@ start-exercise {
 .workout h2 {
     font-size: 1.2rem;
 }
+
+.sets {
+    margin-top: var(--vertical-spacing);
+}

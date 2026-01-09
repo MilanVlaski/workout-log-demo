@@ -136,7 +136,6 @@ export class TrackExercise extends HTMLElement {
 
         // 2. Loop and insert
         setsToRender.forEach((val) => {
-            // TODO reps
             const repsInput = clone('reps-input')
             repsInput.value = val
             repss.insertBefore(repsInput, plusBtn);
@@ -169,9 +168,9 @@ export class TrackExercise extends HTMLElement {
 
             if (currentInputs.length < targetCount) {
                 const fragment = document.createDocumentFragment();
+                const repsInput = clone('reps-input')
                 for (let i = currentInputs.length; i < targetCount; i++) {
-                    // TODO reps
-                    fragment.appendChild(el('sl-input', {className: 'reps', name: 'reps'}));
+                    fragment.appendChild(repsInput);
                 }
                 repss.insertBefore(fragment, plusBtn);
             } else {

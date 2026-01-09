@@ -1,4 +1,4 @@
-import { template, el } from "./../utils.js"
+import { template, el, clone } from "./../utils.js"
 
 
 export class WorkoutLog extends HTMLElement {
@@ -60,8 +60,9 @@ export class WorkoutLog extends HTMLElement {
         weight.querySelector('[name="weight"]').value = setGroup.weight
 
         setGroup.sets.forEach((reps) => {
-            // TODO reps
-            repss.appendChild(el('sl-input', { className: 'reps', name: 'reps', value: reps }))
+            const repsInput = clone('reps-input')
+            repsInput.value = reps
+            repss.appendChild(repsInput)
         })
         setGroupDiv.appendChild(repss)
         setGroupDiv.appendChild(weight)
