@@ -31,14 +31,23 @@ export class WorkoutLog extends HTMLElement {
                     setsWithWeight: [
                         { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
                         { weight: '130kg', sets: [10, 9, 3] }
-                    ]
+                    ],
+                    comment: 'Form was shaky.'
+                },
+                                {
+                    exercise: 'Squat',
+                    setsWithWeight: [
+                        { weight: '120kg', sets: [5, 5, 5, 4, ] },
+                        { weight: '130kg', sets: [10, 9, 3] }
+                    ],
                 },
                 {
                     exercise: 'Pullups',
                     setsWithWeight: [
                         { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
                         { weight: '130kg', sets: [10, 9, 3] }
-                    ]
+                    ],
+                    comment: 'Felt strong today!'
                 }
             ]
         }
@@ -128,6 +137,16 @@ export class WorkoutLog extends HTMLElement {
         exercise.setsWithWeight?.forEach((setGroup) => {
             skeleton.appendChild(this.setGroup(setGroup))
         })
+
+        // Add comment as editable sl-input if it exists
+        if (exercise.comment) {
+            const commentInput = el('sl-input', {
+                placeholder: 'Comment',
+                value: exercise.comment,
+                className: 'exercise-comment'
+            })
+            skeleton.appendChild(commentInput)
+        }
 
         return skeleton
     }
