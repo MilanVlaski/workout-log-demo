@@ -23,24 +23,6 @@ class StartExercise extends HTMLElement {
           </form>
         </div>
       `
-
-      // TODO No reason for this, anymore.
-    startExercise.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const form = e.target;
-      const data = new FormData(form);
-
-      form.dispatchEvent(
-        new CustomEvent(Events.START_EXERCISE, {
-          bubbles: true,
-          detail: { exercise: data.get('exercise') }
-        })
-      )
-      form.reset()
-    })
-
-
   }
 }
 

@@ -32,10 +32,14 @@ class EditWorkout extends HTMLElement {
         // Read from queryvalues?
         workout.querySelector('h1').textContent = 'Workout'
 
-        workout.addEventListener(Events.START_EXERCISE, (e) => {
-            const trackExerciseELement = new TrackExercise()
-            trackExerciseELement.setAttribute('name', e.detail.exercise)
-            workout.insertBefore(trackExerciseELement, divider)
+        workout.addEventListener('submit', (e) => {
+            if (e.target.getAttribute('action') === 'startExercise') {
+                e.preventDefault()
+                const trackExerciseELement = new TrackExercise()
+                const exercise = new FormData(e.target).get('exercise')
+                trackExerciseELement.setAttribute('name', exercise)
+                workout.insertBefore(trackExerciseELement, divider)
+            }
         })
 
         workout.addEventListener(Events.FINISH_EXERCISE, (e) => {
