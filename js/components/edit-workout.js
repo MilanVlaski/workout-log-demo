@@ -4,6 +4,29 @@ import "./start-exercise.js"
 import { TrackExercise } from "./track-exercise.js";
 import "./workout-log.js"
 
+// Always escape HTML for text arguments!
+function escapeHtml(html) {
+    const div = document.createElement('div');
+    div.textContent = html;
+    return div.innerHTML;
+}
+
+// Custom function to emit toast notifications
+function notify(message, variant = 'primary', icon = 'info-circle', duration = 3000) {
+    const alert = Object.assign(document.createElement('sl-alert'), {
+        variant,
+        closable: true,
+        duration: duration,
+        innerHTML: `
+            <sl-icon name="${icon}" slot="icon"></sl-icon>
+            ${escapeHtml(message)}
+        `
+    });
+
+    document.body.append(alert);
+    return alert.toast();
+}
+
 class EditWorkout extends HTMLElement {
 
     static mainTemplate = template(/*html*/`
@@ -47,6 +70,11 @@ class EditWorkout extends HTMLElement {
             document.querySelector('workout-log')
                 .addExercise(e.detail)
             e.target.remove()
+        })
+
+        // Listen for workout finish event to show toast notification
+        workout.addEventListener(Events.FINISH_WORKOUT, (e) => {
+            notify('Workout completed successfully!', 'success', 'check2-circle', 5000);
         })
 
         return main
