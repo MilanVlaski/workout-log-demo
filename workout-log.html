@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" media="(prefers-color-scheme:light)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+    <link rel="stylesheet" media="(prefers-color-scheme:dark)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css" onload="document.documentElement.classList.add('sl-theme-dark');" />
+
+    <!-- Shoelace components -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/format-date/format-date.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/button/button.js"></script>
+
+
     <script type="module" src="./js/components/workout-log/workout-log.js"></script>
     <title>Workout Log</title>
 </head>
+
 <body>
     <main>
         <workout-log></workout-log>
@@ -21,7 +32,7 @@
     <template id="workout">
         <div class="workout">
             <h2></h2>
-            <sl-format-date></sl-format-date>
+            <sl-format-date month="long" day="numeric" year="numeric"></sl-format-date>
             <!-- exercise texts-->
             <div class="actions"></div>
         </div>
@@ -31,4 +42,5 @@
         <p class="exercise"></p>
     </template>
 </body>
+
 </html>

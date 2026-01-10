@@ -9,16 +9,51 @@ class WorkoutLog extends HTMLElement {
     connectedCallback() {
         // Default
         const $workoutLog = workoutLogTemplate.cloneNode(true)
-        
+
         const existingWorkoutLog = JSON.parse(sessionStorage.getItem('workoutLog'))
         console.log(existingWorkoutLog)
-        if(!existingWorkoutLog || existingWorkoutLog.workouts.length === 0) {
+        if (!existingWorkoutLog || existingWorkoutLog.workouts.length === 0) {
             $workoutLog.querySelector('h1').textContent = "No workouts yet."
         } else {
-            $workoutLog.querySelector('h1').textContent = "TODO"
+            existingWorkoutLog.workouts.forEach(workout => {
+                const $workout = workoutTemplate.cloneNode(true)
+
+                $workout.querySelector('h2').textContent
+                $workout.querySelector('sl-format-date').date = workout.date
+                const $edit = document.createElement('sl-button')
+                $edit.innerText = 'Edit'
+                $edit.setAttribute('data-action', 'edit-workout')
+                $workout.querySelector('.actions').appendChild($edit)
+
+                workout.exercises.forEach(exercise => {
+                    const $exercise = exerciseTemplate.cloneNode(true)
+                    $exercise.appendChild(formatExercise(exercise))
+
+                    $workout.appendChild($exercise)
+                })
+
+                $workoutLog.appendChild($workout)
+            })
         }
 
         this.replaceChildren($workoutLog)
+    }
+
+    formatExercise(exercise) {
+        const setsString = exercise.setsWithWeight
+            .map(sw => `${sw.sets.join(', ')} ${sw.weight}`)
+            .join(' ');
+
+        return `${exercise.exercise}: ${setsString}`;
+    }
+
+    // Example usage targeting the first item in your data:
+    const result = formatSingleExercise(this.initialData.exercises[0]);
+console.log(result);
+    escapeHtml(html) {
+        const div = document.createElement('div');
+        div.textContent = html;
+        return div.innerHTML;
     }
 }
 
