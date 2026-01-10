@@ -3,12 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="./js/components/workout-log.js"></script>
+    <script type="module" src="./js/components/workout-log/workout-log.js"></script>
     <title>Workout Log</title>
 </head>
 <body>
     <main>
-        <w
+        <workout-log></workout-log>
     </main>
+
+    <template id="workout-log">
+        <div class="workout-log">
+            <h1>Workout Log</h1>
+            <!-- workouts -->
+        </div>
+    </template>
+
+    <template id="workout">
+        <div class="workout">
+            <h2></h2>
+            <sl-format-date></sl-format-date>
+            <!-- exercise texts-->
+            <div class="actions"></div>
+        </div>
+    </template>
+
+    <template id="exercise">
+        <p class="exercise"></p>
+    </template>
 </body>
 </html>

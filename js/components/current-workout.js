@@ -8,7 +8,7 @@ export class CurrentWorkout extends HTMLElement {
 
     static mainTemplate = template(/*html*/`
     <form class="current-workout">
-        <h2>Workout Log</h2>
+        <h2>Current Workout</h2>
 
         <!-- logs -->
 
