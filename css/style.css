@@ -131,7 +131,7 @@ start-exercise {
     margin-top: var(--vertical-spacing);
 }
 
-.workout-log .actions {
+.current-workout .actions {
     margin-top: var(--vertical-spacing);
 }
 

@@ -2,7 +2,7 @@ import { template, el } from "./../utils.js"
 import { Events } from "./../events.js"
 import "./start-exercise.js"
 import { TrackExercise } from "./track-exercise.js";
-import "./workout-log.js"
+import "./current-workout.js"
 
 // Always escape HTML for text arguments!
 function escapeHtml(html) {
@@ -38,7 +38,7 @@ class EditWorkout extends HTMLElement {
 
         <start-exercise></start-exercise>
         <sl-divider></sl-divider>
-        <workout-log></workout-log>
+        <current-workout></current-workout>
     </sl-card>
     `)
 
@@ -67,7 +67,7 @@ class EditWorkout extends HTMLElement {
         })
 
         workout.addEventListener(Events.FINISH_EXERCISE, (e) => {
-            document.querySelector('workout-log')
+            document.querySelector('current-workout')
                 .addExercise(e.detail)
             e.target.remove()
         })
