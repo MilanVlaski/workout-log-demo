@@ -75,7 +75,23 @@ class EditWorkout extends HTMLElement {
         // Listen for workout finish event to show toast notification
         workout.addEventListener(Events.FINISH_WORKOUT, (e) => {
             notify('Workout completed successfully!', 'success', 'check2-circle', 5000);
-            // TODO append the log in session storage
+
+            // Store workout data in session storage
+            const workoutData = e.detail;
+
+            // Get existing workoutLog from session storage or initialize empty array
+            const existingWorkoutLog = JSON.parse(sessionStorage.getItem('workoutLog')) || {workouts: []}
+
+            // Add current workout data to the array
+            existingWorkoutLog.workouts.push({
+                date: new Date().toISOString(),
+                exercises: workoutData.exercises
+            });
+
+            // Store updated workoutLog back in session storage
+            sessionStorage.setItem('workoutLog', JSON.stringify(existingWorkoutLog));
+
+            console.log('Workout saved to session storage:', existingWorkoutLog);
         })
 
         return main

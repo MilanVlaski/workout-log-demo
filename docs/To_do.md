@@ -22,9 +22,21 @@
 8. [ ] Then, I will create the "exercises" custom component. Which will contain an "exercise" piece of html.
 9. [ ] When the finish form gets submitted, the parent will catch it and somehow tell the "exercises" component to add an exercise, with the proper data, etc.
 ---
-- [ ] Add x button for individual exercises
-- [ ] Put the workout log in sessionstorage.
-- [ ] Make the workout log page. Just text.
+- [x] Add x button for individual exercises
+- [ ] Put the workout log in sessionstorage, as json, I guess.
+- [ ] Make the workout log page.
+  - [ ] 1. Make sure it renders a message like "No workouts yet." if null.
+  - [ ] 2. Discuss whether we should use HTML text, or just textarea. HTML is convenient, because we definitely want interactivity later. But i'm thinking we use <br> a lot, and treat the whole log as a paragraph, or so.  Or not, we could also use a <p> for each workout.
+  - [ ] 3. Serialize json from session storage into the textarea, in an appropriate format.
+Arms: 26.06.2025.
+Bicep curl: 10 9 8 80lb 10 9 70lb (Comment)
+Bicep curl: 10 9 8 80lb (Comment)
+Bicep curl: 10 9 8 80lb (Comment)
+
+Arms: 26.06.2025.
+Bicep curl: 10 9 8 80lb 10 9 70lb (Comment)
+Bicep curl: 10 9 8 80lb (Comment)
+Bicep curl: 10 9 8 80lb (Comment)
 - [ ] Workout log has an export option, but it's not available for demo.
 - [ ] Maybe make a workout in a log editable, by reading the workout data, and loading it into the editing page. Can go in the query values. When the user is done, they can perform a PUT on the backend, where we will fetch the thing. 
 - [x] Make sure the reps are not empty.
