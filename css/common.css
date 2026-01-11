@@ -7,11 +7,13 @@
 
     --vertical-spacing: var(--spacing);
     --horizontal-spacing: var(--spacing);
+
+    line-height: 1.5;
 }
 
 @media (max-width: 900px) {
     :root {
-        --vertical-spacing: calc(var(--spacing) * 0.6);
+        --vertical-spacing: calc(var(--spacing) * 0.8);
         --horizontal-spacing: calc(var(--spacing) * 0.4);
     }
 

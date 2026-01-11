@@ -110,15 +110,16 @@ start-exercise {
     font-size: 1.2rem;
 }
 
-.sets {
-    margin-top: var(--vertical-spacing);
-}
-
 .current-workout .actions {
     margin-top: var(--vertical-spacing);
 }
 
 .set + .set {
+    margin-top: var(--vertical-spacing);
+}
+
+.sets:not(:first-child),
+.sets > :not(:first-child) {
     margin-top: var(--vertical-spacing);
 }
 
