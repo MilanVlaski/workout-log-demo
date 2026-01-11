@@ -27,8 +27,7 @@ class WorkoutLog extends HTMLElement {
 
                 workout.exercises.forEach(exercise => {
                     const $exercise = exerciseTemplate.cloneNode(true)
-                    $exercise.appendChild(formatExercise(exercise))
-
+                    $exercise.textContent = escapeHtml(formatExercise(exercise))
                     $workout.appendChild($exercise)
                 })
 
@@ -39,22 +38,22 @@ class WorkoutLog extends HTMLElement {
         this.replaceChildren($workoutLog)
     }
 
-    formatExercise(exercise) {
-        const setsString = exercise.setsWithWeight
-            .map(sw => `${sw.sets.join(', ')} ${sw.weight}`)
-            .join(' ');
 
-        return `${exercise.exercise}: ${setsString}`;
-    }
+    
+}
 
-    // Example usage targeting the first item in your data:
-    const result = formatSingleExercise(this.initialData.exercises[0]);
-console.log(result);
-    escapeHtml(html) {
-        const div = document.createElement('div');
-        div.textContent = html;
-        return div.innerHTML;
-    }
+function formatExercise(exercise) {
+    const setsString = exercise.setsWithWeight
+        .map(sw => `${sw.sets.join(', ')} ${sw.weight}`)
+        .join(' ');
+
+    return `${exercise.name}: ${setsString}`;
+}
+
+function escapeHtml(html) {
+    const div = document.createElement('div');
+    div.textContent = html;
+    return div.innerHTML;
 }
 
 customElements.define('workout-log', WorkoutLog)

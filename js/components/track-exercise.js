@@ -101,7 +101,7 @@ export class TrackExercise extends HTMLElement {
             })
 
             const finalData = {
-                exercise: form.querySelector('h2').textContent,
+                name: form.querySelector('h2').textContent,
                 setsWithWeight: setGroups,
                 comment: form.querySelector('[name="comment"]')?.value || ""
             };

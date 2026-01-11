@@ -27,7 +27,7 @@ export class CurrentWorkout extends HTMLElement {
         this.initialData = {
             exercises: [
                 {
-                    exercise: 'Squat',
+                    name: 'Squat',
                     setsWithWeight: [
                         { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
                         { weight: '130kg', sets: [10, 9, 3] }
@@ -35,7 +35,7 @@ export class CurrentWorkout extends HTMLElement {
                     comment: 'Form was shaky.'
                 },
                 {
-                    exercise: 'Pullups',
+                    name: 'Pullups',
                     setsWithWeight: [
                         { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
                         { weight: '130kg', sets: [10, 9, 3] }
@@ -134,7 +134,7 @@ export class CurrentWorkout extends HTMLElement {
         xButton.setAttribute('label', 'Exit')
 
         header.appendChild(xButton)
-        header.appendChild(el('p', { textContent: exercise.exercise }))
+        header.appendChild(el('p', { textContent: exercise.name }))
         skeleton.appendChild(header)
 
         // TODO set className is nonsense. It's "exercise"
