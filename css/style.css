@@ -140,4 +140,5 @@ start-exercise {
 .sl-toast-stack {
     top: auto;
     bottom: 0;
+    right: auto;
 }
