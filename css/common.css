@@ -1,0 +1,42 @@
+:root {
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+
+    box-sizing: border-box;
+
+    --spacing: 1rem;
+
+    --vertical-spacing: var(--spacing);
+    --horizontal-spacing: var(--spacing);
+}
+
+@media (max-width: 900px) {
+    :root {
+        --vertical-spacing: calc(var(--spacing) * 0.6);
+        --horizontal-spacing: calc(var(--spacing) * 0.4);
+    }
+
+    .workout :is(.reps, .weight) {
+        --sl-input-spacing-medium: var(--horizontal-spacing);
+    }
+
+}
+
+body>*,
+header>nav {
+    max-width: 50ch;
+    margin-inline: auto;
+}
+
+header>nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+mv-header > header {
+    padding-inline: var(--horizontal-spacing);
+    padding-block: var(--vertical-spacing);
+}
+
+body {
+    margin: 0;
+}

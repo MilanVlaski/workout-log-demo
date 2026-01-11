@@ -32,7 +32,7 @@ class EditWorkout extends HTMLElement {
     static mainTemplate = template(/*html*/`
     <sl-card class="workout">
         <div slot="header">
-            <h1></h1>
+            <!-- <h1>Workout</h1> -->
             <sl-format-date month="long" day="numeric" year="numeric"></sl-format-date>
         </div>
 
@@ -51,9 +51,6 @@ class EditWorkout extends HTMLElement {
 
         const workout = main.querySelector('.workout')
         const divider = main.querySelector('sl-divider')
-
-        // Read from queryvalues?
-        workout.querySelector('h1').textContent = 'Workout'
 
         workout.addEventListener('submit', (e) => {
             if (e.target.getAttribute('action') === 'startExercise') {

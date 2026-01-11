@@ -1,0 +1,11 @@
+.workout-log .actions {
+    float: right;
+}
+
+.workout-log {
+    width: 100%;
+}
+
+.workout-log h1 {
+    font-size: 1.5rem;
+}

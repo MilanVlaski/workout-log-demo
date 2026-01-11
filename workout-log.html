@@ -11,22 +11,28 @@
     <!-- Shoelace components -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/format-date/format-date.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/button/button.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/card/card.js"></script>
 
+
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/workout-log.css">
 
     <script type="module" src="./js/components/workout-log/workout-log.js"></script>
+    <script type="module" src="./js/components/header.js"></script>
     <title>Workout Log</title>
 </head>
 
 <body>
+    <mv-header></mv-header>
     <main>
         <workout-log></workout-log>
     </main>
 
     <template id="workout-log">
-        <div class="workout-log">
+        <sl-card class="workout-log">
             <h1>Workout Log</h1>
             <!-- workouts -->
-        </div>
+        </sl-card>
     </template>
 
     <template id="workout">
@@ -34,7 +40,7 @@
             <h2></h2>
             <sl-format-date month="long" day="numeric" year="numeric"></sl-format-date>
             <!-- exercise texts-->
-            <div class="actions"></div>
+            <div class="actions"><sl-button size="small">Edit</sl-button></div>
         </div>
     </template>
 

@@ -1,20 +1,8 @@
 :root {
-    --spacing: 1rem;
-
-    --vertical-spacing: var(--spacing);
-    --horizontal-spacing: var(--spacing);
-
-
     --reps-width: 5ch;
     --weight-width: 12ch;
 
-    font-size: clamp(16px, 16px + .5vw, 24px);
     box-sizing: border-box;
-}
-
-body>main {
-    margin-inline: auto;
-    max-width: fit-content;
 }
 
 .workout {
@@ -26,10 +14,10 @@ body>main {
     font-size: 1.5rem;
     display: inline;
 }
-
+/* 
 .workout sl-format-date {
     float: right;
-}
+} */
 
 .set {
     display: flex;
@@ -53,11 +41,6 @@ body>main {
 }
 
 @media (max-width: 900px) {
-    :root {
-        --vertical-spacing: calc(var(--spacing) * 0.6);
-        --horizontal-spacing: calc(var(--spacing) * 0.4);
-    }
-
     .workout :is(.reps, .weight) {
         --sl-input-spacing-medium: var(--horizontal-spacing);
     }
@@ -144,4 +127,16 @@ start-exercise {
     flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between;
+}
+
+.workout {
+    width: 100%;
+}
+.workout {
+    width: 100%;
+}
+
+.sl-toast-stack {
+    top: auto;
+    bottom: 0;
 }

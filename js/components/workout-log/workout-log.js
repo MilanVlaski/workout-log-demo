@@ -7,6 +7,32 @@ class WorkoutLog extends HTMLElement {
 
 
     connectedCallback() {
+        // const initialData = {
+        //     workouts: [{
+        //         exercises: [
+        //             {
+        //                 name: 'Squat',
+        //                 setsWithWeight: [
+        //                     { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+        //                     { weight: '130kg', sets: [10, 9, 3] }
+        //                 ],
+        //                 comment: 'Form was shaky.'
+        //             },
+        //             {
+        //                 name: 'Pullups',
+        //                 setsWithWeight: [
+        //                     { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+        //                     { weight: '130kg', sets: [10, 9, 3] }
+        //                 ],
+        //                 comment: 'Felt strong today!'
+        //             }
+        //         ],
+        //         date: new Date().toISOString()
+        //     }
+        //     ]
+        // }
+        // sessionStorage.setItem('workoutLog', JSON.stringify(initialData))
+
         // Default
         const $workoutLog = workoutLogTemplate.cloneNode(true)
 
@@ -20,10 +46,6 @@ class WorkoutLog extends HTMLElement {
 
                 $workout.querySelector('h2').textContent
                 $workout.querySelector('sl-format-date').date = workout.date
-                const $edit = document.createElement('sl-button')
-                $edit.innerText = 'Edit'
-                $edit.setAttribute('data-action', 'edit-workout')
-                $workout.querySelector('.actions').appendChild($edit)
 
                 workout.exercises.forEach(exercise => {
                     const $exercise = exerciseTemplate.cloneNode(true)
@@ -39,7 +61,7 @@ class WorkoutLog extends HTMLElement {
     }
 
 
-    
+
 }
 
 function formatExercise(exercise) {
