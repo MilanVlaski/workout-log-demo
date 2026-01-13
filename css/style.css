@@ -114,12 +114,12 @@ start-exercise {
     margin-top: var(--vertical-spacing);
 }
 
-.set + .set {
+.set+.set {
     margin-top: var(--vertical-spacing);
 }
 
 .sets:not(:first-child),
-.sets > :not(:first-child) {
+.sets> :not(:first-child) {
     margin-top: var(--vertical-spacing);
 }
 

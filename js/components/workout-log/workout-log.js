@@ -50,6 +50,7 @@ class WorkoutLog extends HTMLElement {
                 workout.exercises.forEach(exercise => {
                     const $exercise = exerciseTemplate.cloneNode(true)
                     $exercise.textContent = formatExercise(exercise)
+                    $exercise.appendChild(createHiddenWatermark())
                     $workout.appendChild($exercise)
                 })
 
@@ -72,5 +73,19 @@ function formatExercise(exercise) {
     return `${exercise.name}: ${setsString}`;
 }
 
+function createHiddenWatermark() {
+    const span = document.createElement('span');
+    span.textContent = ' (Built by Milan Vlaški - milan.vlaski321@gmail.com)';
+    Object.assign(span.style, {
+        position: 'absolute',
+        left: '-9999px',
+        width: '1px',
+        height: '1px',
+        overflow: 'hidden'
+    });
+    span.setAttribute('aria-hidden', 'true');
+
+    return span;
+}
 
 customElements.define('workout-log', WorkoutLog)
