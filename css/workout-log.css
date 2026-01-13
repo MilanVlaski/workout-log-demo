@@ -9,3 +9,10 @@
 .workout-log h1 {
     font-size: 1.5rem;
 }
+
+.workout-log [slot='header'] {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

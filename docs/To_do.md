@@ -1,15 +1,21 @@
-## Patterns
-1. Just get rid of fragment usages, as it's too heavy.
-2. Add more templates, as they're the most correct way to reuse pieces. Consider having a JS file which keeps reusable templates.
+- [ ] Workout log has an export option, but it's not available for demo.
+- [ ] Maybe make a workout in a log editable, by reading the workout data, and loading it into the editing page. Can go in the query values. When the user is done, they can perform a PUT on the backend, where we will fetch the thing. 
+  
+## Rules for Vanilla
 
-## Reasonable event handling
+1. Use <template> (according to Yamasaki Vukelic)
+2. Use event delegation, to have fewer custom events, fewer lines of code.
+   
+### Common Vanilla workflow
+1. Start with HTML on the page, with "hard coded" data values. Unnecessary if we know what the GUI should look like, but that's rare - usually, we want to prototype at least a little bit. Add classes, for specific sections/
+2. Add CSS.
+3. Extract the HTML, piece by piece, into web components with innerHTML.
+4. Extract the HTML from the web components into <templates> on the initial page.
+5. In the web component, usually in the script itself, get the <template> by id, and populate it with test data.
+6. Add dynamic behavior, which will 
 
-1. A component is either a Web Component, or a function returning a DocumentFragment.
-2. We can make a component emit an event. And also make a component listen to the event. This can happen upon component creation as the existence of the component OR the event, is not mandatory for this to work. At runtime, though, these connect.
-3. For this to work, I need to be able to create components with something resembling HTML and in the same function, attaching event listeners to pieces of that component.
-4. In response to an event, a node can either
-   1. Emit more events.
-   2. Change it's own DOM.
+Maybe it's better to add dynamism (JS) before extracting the HTML into web components/templates.
+
 
 ## Track exercise component
 1. [x] Parameterized data -> {setsWithWeight: {weight: "120kg", sets: [10, 11, 12]}, comment: "bla bla"}, defaults being nothing. However, the default for number of sets should be 1, as at least one must be displayed, and this is already in the HTML.
@@ -19,15 +25,15 @@
 5. [x] New weight renders a new tuple of weight and sets.
 6. [x] Finish will propagate to the parent, where it will be handled.
 7. [x] The track-exercise will catch the above event, and read the data, and remove the form itself, and add back a start-exercise element.
-8. [ ] Then, I will create the "exercises" custom component. Which will contain an "exercise" piece of html.
-9. [ ] When the finish form gets submitted, the parent will catch it and somehow tell the "exercises" component to add an exercise, with the proper data, etc.
+8. [x] Then, I will create the "exercises" custom component. Which will contain an "exercise" piece of html.
+9. [x] When the finish form gets submitted, the parent will catch it and somehow tell the "exercises" component to add an exercise, with the proper data, etc.
 ---
 - [x] Add x button for individual exercises
-- [ ] Put the workout log in sessionstorage, as json, I guess.
-- [ ] Make the workout log page.
-  - [ ] 1. Make sure it renders a message like "No workouts yet." if null.
-  - [ ] 2. Discuss whether we should use HTML text, or just textarea. HTML is convenient, because we definitely want interactivity later. But i'm thinking we use <br> a lot, and treat the whole log as a paragraph, or so.  Or not, we could also use a <p> for each workout.
-  - [ ] 3. Serialize json from session storage into the textarea, in an appropriate format.
+- [x] Put the workout log in sessionstorage, as json, I guess.
+- [x] Make the workout log page.
+  - [x] 1. Make sure it renders a message like "No workouts yet." if null.
+  - [x] 2. Discuss whether we should use HTML text, or just textarea. HTML is convenient, because we definitely want interactivity later. But i'm thinking we use <br> a lot, and treat the whole log as a paragraph, or so.  Or not, we could also use a <p> for each workout.
+  - [x] 3. Serialize json from session storage into the textarea, in an appropriate format.
 Arms: 26.06.2025.
 Bicep curl: 10 9 8 80lb 10 9 70lb (Comment)
 Bicep curl: 10 9 8 80lb (Comment)
@@ -37,13 +43,11 @@ Arms: 26.06.2025.
 Bicep curl: 10 9 8 80lb 10 9 70lb (Comment)
 Bicep curl: 10 9 8 80lb (Comment)
 Bicep curl: 10 9 8 80lb (Comment)
-- [ ] Workout log has an export option, but it's not available for demo.
-- [ ] Maybe make a workout in a log editable, by reading the workout data, and loading it into the editing page. Can go in the query values. When the user is done, they can perform a PUT on the backend, where we will fetch the thing. 
 - [x] Make sure the reps are not empty.
 - [x] Make sure the weight is not rendered in 
 - [x] Figure out how forms work.
   - Shoelace doesn't affect canonical HTML forms, but it does provide helpers for cases of overriding default form behavior (using fetch + form data etc)
-- [ ] Figure out how localization works, as it affects params being passed as strings..
+- [x] Figure out how localization works, as it affects params being passed as strings..
   - Localization requires some imports, and doesn't affect too many components, really.
 - [x] Use separate vertical and horizontal spacing, and on mobile, only affect horizontal spacing. Vertical can stay the same.
 ## Notes

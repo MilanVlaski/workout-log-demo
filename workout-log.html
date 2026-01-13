@@ -12,6 +12,9 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/format-date/format-date.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/button/button.js"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/card/card.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/tooltip/tooltip.js"></script>
+
+
 
 
     <link rel="stylesheet" href="./css/common.css">
@@ -30,7 +33,12 @@
 
     <template id="workout-log">
         <sl-card class="workout-log">
-            <h1>Workout Log</h1>
+            <div slot="header">
+                <h1>Workout Log</h1>
+                <sl-tooltip content="Not available in demo." trigger="click">
+                    <sl-button>Export</sl-button>
+                </sl-tooltip>
+            </div>
             <!-- workouts -->
         </sl-card>
     </template>
@@ -40,7 +48,11 @@
             <h2></h2>
             <sl-format-date month="long" day="numeric" year="numeric"></sl-format-date>
             <!-- exercise texts-->
-            <div class="actions"><sl-button size="small">Edit</sl-button></div>
+            <div class="actions">
+                <sl-tooltip content="Not available in demo." trigger="click">
+                    <sl-button size="small">Edit</sl-button>
+                </sl-tooltip>
+            </div>
         </div>
     </template>
 
