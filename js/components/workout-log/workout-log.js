@@ -7,31 +7,31 @@ class WorkoutLog extends HTMLElement {
 
 
     connectedCallback() {
-        const initialData = {
-            workouts: [{
-                exercises: [
-                    {
-                        name: 'Squat',
-                        setsWithWeight: [
-                            { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-                            { weight: '130kg', sets: [10, 9, 3] }
-                        ],
-                        comment: 'Form was shaky.'
-                    },
-                    {
-                        name: 'Pullups',
-                        setsWithWeight: [
-                            { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-                            { weight: '130kg', sets: [10, 9, 3] }
-                        ],
-                        comment: 'Felt strong today!'
-                    }
-                ],
-                date: new Date().toISOString()
-            }
-            ]
-        }
-        sessionStorage.setItem('workoutLog', JSON.stringify(initialData))
+        // const initialData = {
+        //     workouts: [{
+        //         exercises: [
+        //             {
+        //                 name: 'Squat',
+        //                 setsWithWeight: [
+        //                     { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+        //                     { weight: '130kg', sets: [10, 9, 3] }
+        //                 ],
+        //                 comment: 'Form was shaky.'
+        //             },
+        //             {
+        //                 name: 'Pullups',
+        //                 setsWithWeight: [
+        //                     { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+        //                     { weight: '130kg', sets: [10, 9, 3] }
+        //                 ],
+        //                 comment: 'Felt strong today!'
+        //             }
+        //         ],
+        //         date: new Date().toISOString()
+        //     }
+        //     ]
+        // }
+        // sessionStorage.setItem('workoutLog', JSON.stringify(initialData))
 
         // Default
         const $workoutLog = workoutLogTemplate.cloneNode(true)
@@ -67,7 +67,7 @@ class WorkoutLog extends HTMLElement {
 
 function formatExercise(exercise) {
     const setsString = exercise.setsWithWeight
-        .map(sw => `${sw.sets.join(', ')} ${sw.weight}`)
+        .map(sw => `${sw.sets.join(', ')} ${sw.weight || ''}`)
         .join(' ');
 
     return `${exercise.name}: ${setsString}`;

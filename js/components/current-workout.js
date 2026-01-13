@@ -24,26 +24,26 @@ export class CurrentWorkout extends HTMLElement {
 
     connectedCallback() {
 
-        this.initialData = {
-            exercises: [
-                {
-                    name: 'Squat',
-                    setsWithWeight: [
-                        { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-                        { weight: '130kg', sets: [10, 9, 3] }
-                    ],
-                    comment: 'Form was shaky.'
-                },
-                {
-                    name: 'Pullups',
-                    setsWithWeight: [
-                        { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-                        { weight: '130kg', sets: [10, 9, 3] }
-                    ],
-                    comment: 'Felt strong today!'
-                }
-            ]
-        }
+        // this.initialData = {
+        //     exercises: [
+        //         {
+        //             name: 'Squat',
+        //             setsWithWeight: [
+        //                 { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+        //                 { weight: '130kg', sets: [10, 9, 3] }
+        //             ],
+        //             comment: 'Form was shaky.'
+        //         },
+        //         {
+        //             name: 'Pullups',
+        //             setsWithWeight: [
+        //                 { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+        //                 { weight: '130kg', sets: [10, 9, 3] }
+        //             ],
+        //             comment: 'Felt strong today!'
+        //         }
+        //     ]
+        // }
 
         const container = CurrentWorkout.mainTemplate.content.cloneNode(true).firstElementChild
 
