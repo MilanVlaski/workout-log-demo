@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+.workout ::part(form-control-label)::after {
+    display: none;
+}
+
 .workout {
     --sl-spacing-large: var(--vertical-spacing);
     --sl-input-spacing-medium: 0.5rem;
