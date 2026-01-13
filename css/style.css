@@ -1,6 +1,6 @@
 :root {
     --reps-width: 5ch;
-    --weight-width: 12ch;
+    --weight-width: 10ch;
 
     box-sizing: border-box;
 }
@@ -36,7 +36,7 @@
     width: var(--reps-width);
 }
 
-.set [name='weight'] {
+.weight {
     width: var(--weight-width);
 }
 
@@ -130,9 +130,6 @@ start-exercise {
     justify-content: space-between;
 }
 
-.workout {
-    width: 100%;
-}
 .workout {
     width: 100%;
 }

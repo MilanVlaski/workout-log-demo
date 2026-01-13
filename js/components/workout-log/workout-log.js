@@ -7,31 +7,31 @@ class WorkoutLog extends HTMLElement {
 
 
     connectedCallback() {
-        // const initialData = {
-        //     workouts: [{
-        //         exercises: [
-        //             {
-        //                 name: 'Squat',
-        //                 setsWithWeight: [
-        //                     { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-        //                     { weight: '130kg', sets: [10, 9, 3] }
-        //                 ],
-        //                 comment: 'Form was shaky.'
-        //             },
-        //             {
-        //                 name: 'Pullups',
-        //                 setsWithWeight: [
-        //                     { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
-        //                     { weight: '130kg', sets: [10, 9, 3] }
-        //                 ],
-        //                 comment: 'Felt strong today!'
-        //             }
-        //         ],
-        //         date: new Date().toISOString()
-        //     }
-        //     ]
-        // }
-        // sessionStorage.setItem('workoutLog', JSON.stringify(initialData))
+        const initialData = {
+            workouts: [{
+                exercises: [
+                    {
+                        name: 'Squat',
+                        setsWithWeight: [
+                            { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+                            { weight: '130kg', sets: [10, 9, 3] }
+                        ],
+                        comment: 'Form was shaky.'
+                    },
+                    {
+                        name: 'Pullups',
+                        setsWithWeight: [
+                            { weight: '120kg', sets: [5, 5, 5, 4, 3, 3] },
+                            { weight: '130kg', sets: [10, 9, 3] }
+                        ],
+                        comment: 'Felt strong today!'
+                    }
+                ],
+                date: new Date().toISOString()
+            }
+            ]
+        }
+        sessionStorage.setItem('workoutLog', JSON.stringify(initialData))
 
         // Default
         const $workoutLog = workoutLogTemplate.cloneNode(true)
@@ -49,7 +49,7 @@ class WorkoutLog extends HTMLElement {
 
                 workout.exercises.forEach(exercise => {
                     const $exercise = exerciseTemplate.cloneNode(true)
-                    $exercise.textContent = escapeHtml(formatExercise(exercise))
+                    $exercise.textContent = formatExercise(exercise)
                     $workout.appendChild($exercise)
                 })
 
@@ -72,10 +72,5 @@ function formatExercise(exercise) {
     return `${exercise.name}: ${setsString}`;
 }
 
-function escapeHtml(html) {
-    const div = document.createElement('div');
-    div.textContent = html;
-    return div.innerHTML;
-}
 
 customElements.define('workout-log', WorkoutLog)
