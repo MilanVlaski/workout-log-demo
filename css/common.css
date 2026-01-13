@@ -37,14 +37,9 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 body>*,
-header>nav {
+mv-header>header {
     max-width: 50ch;
     margin-inline: auto;
-}
-
-header>nav {
-    display: flex;
-    justify-content: space-between;
 }
 
 mv-header>header {
@@ -54,4 +49,9 @@ mv-header>header {
 
 body {
     margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
 }
