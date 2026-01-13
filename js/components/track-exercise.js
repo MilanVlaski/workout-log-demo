@@ -57,6 +57,9 @@ export class TrackExercise extends HTMLElement {
         // }
 
         this.replaceChildren(this.main(exerciseName));
+        requestAnimationFrame(() => {
+            this.querySelector('.reps').focus()
+        })
     }
 
     main(exerciseName) {
