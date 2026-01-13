@@ -1,5 +1,6 @@
 - [ ] Write automation code for the entire thing.
 - [ ] Make start exercise label not show *
+- [ ] Theme. Change primary color to yellow.
 - [x] Write a nice header component.
 - [x] Workout log has an export option, but it's not available for demo.
   - [ ] Think of a better way to communicate demo, and where to see the real product.
