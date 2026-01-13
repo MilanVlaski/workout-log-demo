@@ -1,6 +1,6 @@
 - [ ] Write automation code for the entire thing.
-- [ ] Write a nice header component.
 - [ ] Make start exercise label not show *
+- [x] Write a nice header component.
 - [x] Workout log has an export option, but it's not available for demo.
   - [ ] Think of a better way to communicate demo, and where to see the real product.
 - [x] ~~Maybe make a workout in a log editable, by reading the workout data, and loading it into the editing page. Can go in the query values. When the user is done, they can perform a PUT on the backend, where we will fetch the thing. ~~
