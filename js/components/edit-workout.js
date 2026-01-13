@@ -1,3 +1,10 @@
+/**
+ * Workout Logger Demo
+ * (c) 2026 Milan Vlaški | All Rights Reserved.
+ * Provided "as is" without warranty. 
+ * See legal.html for full proprietary notice and liability disclaimer.
+ */
+
 import { template, el } from "./../utils.js"
 import { Events } from "./../events.js"
 import "./start-exercise.js"

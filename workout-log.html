@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" media="(prefers-color-scheme:light)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
     <link rel="stylesheet" media="(prefers-color-scheme:dark)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css" onload="document.documentElement.classList.add('sl-theme-dark');" />
-    <link rel="stylesheet" href="./css/theme.css"/>
+    <link rel="stylesheet" href="./css/theme.css" />
 
     <!-- Shoelace components -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/format-date/format-date.js"></script>
@@ -26,6 +26,9 @@
 
     <script type="module" src="./js/components/workout-log/workout-log.js"></script>
     <script type="module" src="./js/components/header.js"></script>
+    <script type="module" src="./js/components/footer.js"></script>
+
+
     <title>Workout Log</title>
 </head>
 
@@ -34,6 +37,7 @@
     <main>
         <workout-log></workout-log>
     </main>
+    <mv-footer></mv-footer>
 
     <template id="workout-log">
         <sl-card class="workout-log">

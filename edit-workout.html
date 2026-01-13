@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" media="(prefers-color-scheme:light)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
     <link rel="stylesheet" media="(prefers-color-scheme:dark)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css" onload="document.documentElement.classList.add('sl-theme-dark');" />
-    <link rel="stylesheet" href="./css/theme.css"/>
+    <link rel="stylesheet" href="./css/theme.css" />
 
     <!-- Shoelace components - cherry-picked via CDN -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/alert/alert.js"></script>
@@ -23,15 +23,17 @@
 
     <!-- Set Shoelace base path for asset loading -->
     <script type="module">
-      import { setBasePath } from 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/utilities/base-path.js';
-      setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/');
+        import { setBasePath } from 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/utilities/base-path.js';
+        setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/');
     </script>
-    
+
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/style.css">
 
     <script type="module" src="js/components/edit-workout.js"></script>
     <script type="module" src="js/components/header.js"></script>
+    <script type="module" src="./js/components/footer.js"></script>
+
     <title>Workout</title>
 </head>
 
@@ -39,11 +41,12 @@
     <mv-header></mv-header>
     <main>
 
-    <edit-workout></edit-workout>
-    <template id="reps-input">
-        <sl-input class="reps" name="reps" required></sl-input>
-    </template>
+        <edit-workout></edit-workout>
+        <template id="reps-input">
+            <sl-input class="reps" name="reps" required></sl-input>
+        </template>
     </main>
+    <mv-footer></mv-footer>
 </body>
 
 </html>
