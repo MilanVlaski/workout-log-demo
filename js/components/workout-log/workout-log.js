@@ -39,7 +39,9 @@ class WorkoutLog extends HTMLElement {
         const existingWorkoutLog = JSON.parse(sessionStorage.getItem('workoutLog'))
         console.log(existingWorkoutLog)
         if (!existingWorkoutLog || existingWorkoutLog.workouts.length === 0) {
-            $workoutLog.querySelector('h1').textContent = "No workouts yet."
+            const $exercise = exerciseTemplate.cloneNode(true)
+            $exercise.textContent = "No workouts yet."
+            $workoutLog.appendChild($exercise)
         } else {
             existingWorkoutLog.workouts.forEach(workout => {
                 const $workout = workoutTemplate.cloneNode(true)
