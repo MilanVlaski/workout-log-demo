@@ -1,6 +1,6 @@
-import { template } from "../utils.js"
-import { repsInputTemplate } from "../reps-input.js"
-import { Events } from "../events.js"
+import { template } from "../../utils.js"
+import { repsInputTemplate } from "./reps-input.js"
+import { Events } from "../../events.js"
 
 export class TrackExercise extends HTMLElement {
     initialData = null

@@ -5,8 +5,8 @@
  * See legal.html for full proprietary notice and liability disclaimer.
  */
 
-import { template, el } from "./../utils.js"
-import { Events } from "./../events.js"
+import { template } from "../../utils.js"
+import { Events } from "../../events.js"
 import "./start-exercise.js"
 import { TrackExercise } from "./track-exercise.js";
 import "./current-workout.js"

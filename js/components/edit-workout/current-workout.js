@@ -1,6 +1,6 @@
-import { Events } from "../events.js"
-import { repsInputTemplate } from "../reps-input.js"
-import { template, el } from "../utils.js"
+import { Events } from "../../events.js"
+import { repsInputTemplate } from "./reps-input.js"
+import { template, el } from "../../utils.js"
 
 
 
