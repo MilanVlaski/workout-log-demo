@@ -1,4 +1,13 @@
+- [ ] Deploy to github pages.
+- [ ] "Why workout logging? -> Link to heading of page.
+- [ ] "About me" -> LinkedIn, maybe GitHub. Instagram, when I get it.
+  - [ ] Green is go! Tom Platz picture.
+  - [ ] Buy me a coffee. 
+  - [ ] Tell me about the app!
+- [ ] Localization.
 - [ ] Write automation code for the entire thing.
+- [ ] Todo, make the Vanilla workflow and rules into an essay.
+- [ ] And talk about how nice shoelace is, and why it's nice.
 - [x] Make start exercise label not show *
 - [x] Theme. Change primary color to yellow.
 - [x] Write a nice header component.
@@ -6,7 +15,7 @@
   - [x] Think of a better way to communicate demo, and where to see the real product.
 - [x] ~~Maybe make a workout in a log editable, by reading the workout data, and loading it into the editing page. Can go in the query values. When the user is done, they can perform a PUT on the backend, where we will fetch the thing. ~~
   
-## Rules for Vanilla
+## Rules for Vanilla 
 
 1. Use <template> (according to Yamasaki Vukelic)
 2. Use event delegation, to have fewer custom events, fewer lines of code.
