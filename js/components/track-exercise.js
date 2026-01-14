@@ -1,4 +1,4 @@
-import { el, template, clone } from "../utils.js"
+import { template } from "../utils.js"
 import { repsInputTemplate } from "../reps-input.js"
 import { Events } from "../events.js"
 

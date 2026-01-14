@@ -36,10 +36,3 @@ export function el(tag, props) { return Object.assign(document.createElement(tag
  */
 export function template(html) { return el('template', { innerHTML: html }) }
 
-export function debugNode(node, text) {
-    const temp = document.createElement('div')
-    temp.appendChild(node.cloneNode(true))
-    console.log(`${text} ${temp.innerHTML}`)
-}
-
-export function clone(id) {return document.getElementById(id).content.cloneNode(true).firstElementChild}

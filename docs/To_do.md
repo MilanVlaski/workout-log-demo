@@ -1,4 +1,4 @@
-- [ ] Deploy to github pages.
+- [x] Deploy to github pages.
 - [ ] "Why workout logging? -> Link to heading of page.
 - [ ] "About me" -> LinkedIn, maybe GitHub. Instagram, when I get it.
   - [ ] Green is go! Tom Platz picture.

@@ -1,5 +1,3 @@
-import { Events } from "../events.js";
-
 /**
  * Depends on shoelace.
  * The combination of input and button is somewhat of a hack, but can in theory
