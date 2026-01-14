@@ -6,66 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" media="(prefers-color-scheme:light)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
     <link rel="stylesheet" media="(prefers-color-scheme:dark)" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css" onload="document.documentElement.classList.add('sl-theme-dark');" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/theme.css" />
 
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
-    <script type="module" src="js/components/start-exercise.js"></script>
-    <script type="module" src="js/components/track-exercise.js"></script>
-    <script src="js/script.js"></script>
+    <!-- Shoelace components - cherry-picked via CDN -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/alert/alert.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/button/button.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/card/card.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/divider/divider.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/icon/icon.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/icon-button/icon-button.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/input/input.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/format-date/format-date.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/button-group/button-group.js"></script>
+
+
+
+    <!-- Set Shoelace base path for asset loading -->
+    <script type="module">
+        import { setBasePath } from 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/utilities/base-path.js';
+        setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/');
+    </script>
+
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script type="module" src="js/components/edit-workout.js"></script>
+    <script type="module" src="js/components/header.js"></script>
+    <script type="module" src="./js/components/footer.js"></script>
 
     <title>Workout</title>
 </head>
 
 <body>
-
+    <mv-header></mv-header>
     <main>
 
-        <sl-card class="workout">
-
-            <div slot="header">
-                <h1>Workout</h1>
-                <sl-format-date date="2020-07-15T09:17:00-04:00" month="long" day="numeric" year="numeric"></sl-format-date>
-            </div>
-
-            <start-exercise></start-exercise>
-
-            <track-exercise></track-exercise>
-
-            <sl-divider></sl-divider>
-            <fieldset class="sets">
-                <legend>Pullups</legend>
-                <div class="set">
-                    <div class="repss">
-                        <sl-input class="reps" value="12"></sl-input>
-                        <sl-input class="reps" value="11"></sl-input>
-                        <sl-input class="reps" value="9"></sl-input>
-                    </div>
-
-                    <sl-input placeholder="Weight" name="weight" value="120kg"></sl-input>
-                </div>
-
-            </fieldset>
-
-            <fieldset class="sets">
-                <legend>Pullups</legend>
-                <div class="set">
-                    <div class="repss">
-                        <sl-input class="reps" value="12"></sl-input>
-                        <sl-input class="reps" value="11"></sl-input>
-                        <sl-input class="reps" value="9"></sl-input>
-                    </div>
-
-                    <sl-input placeholder="Weight" name="weight" value="120kg"></sl-input>
-                </div>
-
-            </fieldset>
-
-            <div class="workout-actions">
-                <sl-button variant="danger" outline type="reset">Clear</sl-button>
-                <sl-button type="submit" variant="primary">Finish</sl-button>
-            </div>
-
+        <edit-workout></edit-workout>
+        <template id="reps-input">
+            <sl-input class="reps" name="reps" required></sl-input>
+        </template>
     </main>
+    <mv-footer></mv-footer>
 </body>
 
 </html>
