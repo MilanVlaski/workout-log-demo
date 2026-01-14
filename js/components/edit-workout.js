@@ -95,7 +95,7 @@ class EditWorkout extends HTMLElement {
             // Store updated workoutLog back in session storage
             sessionStorage.setItem('workoutLog', JSON.stringify(existingWorkoutLog));
 
-            console.log('Workout saved to session storage:', existingWorkoutLog);
+            document.querySelector('current-workout').clear()
         })
 
         return main
