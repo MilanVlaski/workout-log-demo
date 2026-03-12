@@ -1,12 +1,7 @@
 - [x] Deploy to github pages.
-- [ ] "Why workout logging? -> Link to heading of page.
-- [ ] "About me" -> LinkedIn, maybe GitHub. Instagram, when I get it.
-  - [ ] Green is go! Tom Platz picture.
-  - [ ] Buy me a coffee. 
-  - [ ] Tell me about the app!
-- [ ] Localization.
 - [ ] Write automation code for the entire thing.
-- [ ] Todo, make the Vanilla workflow and rules into an essay.
+- [ ] "Why workout logging? -> Make a blog.
+- [ ] Localization.
 - [ ] And talk about how nice shoelace is, and why it's nice.
 - [x] Make start exercise label not show *
 - [x] Theme. Change primary color to yellow.
